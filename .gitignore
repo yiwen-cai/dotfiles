@@ -1,0 +1,37 @@
+# ============================================================
+# 敏感信息（绝对不能上传）
+# ============================================================
+# Claude
+claude/settings.json
+claude/config.json
+
+# Codex
+codex/auth.json
+codex/.env
+# 注意: codex/config.toml 不含密钥，正常上传
+
+# 通用密钥/凭证
+*.pem
+*.key
+*_id_rsa
+id_ed25519
+.env
+!.env.example
+!.gitignore
+
+# ============================================================
+# 运行时数据 / 缓存 / 日志（本机生成，无需同步）
+# ============================================================
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.log
+*.jsonl
+*.bak
+*.tmp
+cache/
+logs/
+backups/
+sessions/
+history.*
+stats-cache.json

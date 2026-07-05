@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sync MoE Project"
+  short_description: "同步 A800 上 MoE KV Cache 实验项目的进展"
+  default_prompt: "同步 moe_kv_cache_experiments 项目进展"
