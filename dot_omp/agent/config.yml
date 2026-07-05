@@ -1,0 +1,15 @@
+setupVersion: 1
+modelRoles:
+  default: zai/glm-5.2:xhigh
+  smol: zai/glm-5.2:low
+  slow: zai/glm-5.2:xhigh
+  vision: zai/glm-5.2:medium
+  plan: zai/glm-5.2:high
+  designer: zai/glm-5.2:medium
+  commit: zai/glm-5.2:low
+  tiny: zai/glm-5.2:minimal
+  task: zai/glm-5.2:high
+  advisor: zai/glm-5.2:high
+defaultThinkingLevel: xhigh
+memory:
+  backend: local

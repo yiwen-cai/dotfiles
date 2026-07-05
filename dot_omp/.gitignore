@@ -1,0 +1,11 @@
+# 防御性白名单：默认忽略 ~/.omp 下的一切，只放行无敏感信息的配置文件。
+# OMP 的数据库/会话/日志可能包含 API key、auth token、对话历史，绝不能上传：
+#   - agent/agent.db (auth_credentials 表含凭证)
+#   - agent/sessions/*.jsonl (对话记录，曾含明文 EXA_API_KEY / ANTHROPIC_AUTH_TOKEN)
+#   - agent/history.db, agent/terminal-sessions/, logs/
+*
+!/.gitignore
+!/agent/
+/agent/*
+!/agent/config.yml
+!/agent/mcp.json
