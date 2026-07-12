@@ -10,6 +10,10 @@ codex/auth.json
 codex/.env
 # 注意: codex/config.toml 不含密钥，正常上传
 
+# Cursor
+cursor/mcp.json
+# 注意: cursor/settings.json、keybindings.json、hooks.json 不含密钥，正常上传
+
 # 通用密钥/凭证
 *.pem
 *.key

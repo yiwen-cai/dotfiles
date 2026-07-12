@@ -1,0 +1,52 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ]
+    },
+    "memory-bank-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@movibe/memory-bank-mcp"
+      ]
+    },
+    "shrimp-task-manager": {
+      "command": "node",
+      "args": [
+        "$HOME/Documents/code/mcp/mcp-shrimp-task-manager/dist/index.js"
+      ],
+      "env": {
+        "DATA_DIR": "$HOME/Documents/code/mcp/mcp-shrimp-task-manager/data"
+      }
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "tavily-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "tavily-mcp"
+      ],
+      "env": {
+        "TAVILY_API_KEY": "YOUR_TAVILY_API_KEY_HERE"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-fetch"
+      ]
+    }
+  }
+}

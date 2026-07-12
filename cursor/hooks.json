@@ -1,0 +1,53 @@
+{
+  "hooks": {
+    "beforeSubmitPrompt": [
+      {
+        "command": "if [ -x \"$HOME/.orca/agent-hooks/cursor-hook.sh\" ]; then /bin/sh \"$HOME/.orca/agent-hooks/cursor-hook.sh\"; fi",
+        "timeout": 10
+      }
+    ],
+    "stop": [
+      {
+        "command": "if [ -x \"$HOME/.orca/agent-hooks/cursor-hook.sh\" ]; then /bin/sh \"$HOME/.orca/agent-hooks/cursor-hook.sh\"; fi",
+        "timeout": 10
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": "if [ -x \"$HOME/.orca/agent-hooks/cursor-hook.sh\" ]; then /bin/sh \"$HOME/.orca/agent-hooks/cursor-hook.sh\"; fi",
+        "timeout": 10
+      }
+    ],
+    "postToolUse": [
+      {
+        "command": "if [ -x \"$HOME/.orca/agent-hooks/cursor-hook.sh\" ]; then /bin/sh \"$HOME/.orca/agent-hooks/cursor-hook.sh\"; fi",
+        "timeout": 10
+      }
+    ],
+    "postToolUseFailure": [
+      {
+        "command": "if [ -x \"$HOME/.orca/agent-hooks/cursor-hook.sh\" ]; then /bin/sh \"$HOME/.orca/agent-hooks/cursor-hook.sh\"; fi",
+        "timeout": 10
+      }
+    ],
+    "beforeShellExecution": [
+      {
+        "command": "if [ -x \"$HOME/.orca/agent-hooks/cursor-hook.sh\" ]; then /bin/sh \"$HOME/.orca/agent-hooks/cursor-hook.sh\"; fi",
+        "timeout": 10
+      }
+    ],
+    "beforeMCPExecution": [
+      {
+        "command": "if [ -x \"$HOME/.orca/agent-hooks/cursor-hook.sh\" ]; then /bin/sh \"$HOME/.orca/agent-hooks/cursor-hook.sh\"; fi",
+        "timeout": 10
+      }
+    ],
+    "afterAgentResponse": [
+      {
+        "command": "if [ -x \"$HOME/.orca/agent-hooks/cursor-hook.sh\" ]; then /bin/sh \"$HOME/.orca/agent-hooks/cursor-hook.sh\"; fi",
+        "timeout": 10
+      }
+    ]
+  },
+  "version": 1
+}

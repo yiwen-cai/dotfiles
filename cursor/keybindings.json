@@ -1,0 +1,51 @@
+// 将键绑定放在此文件中以覆盖默认值
+[
+    {
+        "key": "ctrl+alt+f",
+        "command": "-leap.find"
+    },
+    {
+        "key": "ctrl+cmd+i",
+        "command": "-workbench.panel.chat",
+        "when": "workbench.panel.chat.view.copilot.active"
+    },
+    {
+        "key": "shift+cmd+k",
+        "command": "workbench.panel.chatEditing",
+        "when": "workbench.panel.chat.view.edits.active"
+    },
+    {
+        "key": "shift+cmd+i",
+        "command": "-workbench.panel.chatEditing",
+        "when": "workbench.panel.chat.view.edits.active"
+    },
+    {
+        "key": "tab",
+        "command": "selectNextSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "-selectNextSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+    },
+    {
+        "key": "shift+tab",
+        "command": "selectPrevSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "-selectPrevSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+    },
+    {
+        "key": "cmd+n",
+        "command": "-chatgpt.newChat",
+        "when": "chatgpt.supportsNewChatKeyShortcut"
+    },
+    {
+        "key": "cmd+l",
+        "command": "chatgpt.sidebarSecondaryView.focus"
+    }
+]

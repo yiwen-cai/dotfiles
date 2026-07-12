@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 # dotfiles 一键安装脚本
 # 用法: ./install.sh
-# 功能: 把仓库内的配置软链接到 ~/.claude 和 ~/.codex 对应位置
+# 功能: 把仓库内的配置软链接到 ~/.claude、~/.codex 和 Cursor 对应位置
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CLAUDE_HOME="$HOME/.claude"
 CODEX_HOME="$HOME/.codex"
+CURSOR_HOME="$HOME/.cursor"
+CURSOR_USER="$HOME/Library/Application Support/Cursor/User"
 
 ln_safe() {
   # ln_safe <源文件> <目标>
@@ -59,6 +61,22 @@ if [ -d "$REPO_DIR/codex/skills" ]; then
   fi
 fi
 
+echo "==> 安装 Cursor 配置"
+mkdir -p "$CURSOR_HOME" "$CURSOR_USER"
+# Editor settings (macOS Application Support)
+ln_safe "$REPO_DIR/cursor/settings.json"    "$CURSOR_USER/settings.json"
+ln_safe "$REPO_DIR/cursor/keybindings.json" "$CURSOR_USER/keybindings.json"
+if [ -d "$REPO_DIR/cursor/snippets" ]; then
+  if [ -e "$CURSOR_USER/snippets" ] && [ ! -L "$CURSOR_USER/snippets" ]; then
+    echo "  [warn] $CURSOR_USER/snippets 已存在且非软链接，跳过（请手动合并）"
+  else
+    ln_safe "$REPO_DIR/cursor/snippets" "$CURSOR_USER/snippets"
+  fi
+fi
+# Agent / CLI configs under ~/.cursor
+ln_safe "$REPO_DIR/cursor/hooks.json"       "$CURSOR_HOME/hooks.json"
+ln_safe "$REPO_DIR/cursor/cli-config.json"  "$CURSOR_HOME/cli-config.json"
+
 echo
 echo "==> 需要手动填写的密钥文件（已提供 .example 模板）"
 echo "    cd $REPO_DIR"
@@ -66,5 +84,10 @@ echo "    cp claude/settings.json.example ~/.claude/settings.json    # 然后编
 echo "    cp claude/config.json.example    ~/.claude/config.json     # 然后编辑填入 primaryApiKey"
 echo "    cp codex/auth.json.example       ~/.codex/auth.json        # 然后编辑填入 OPENAI_API_KEY"
 echo "    cp codex/.env.example            ~/.codex/.env             # 然后编辑填入代理"
+echo "    cp cursor/mcp.json.example       ~/.cursor/mcp.json        # 然后编辑填入 TAVILY_API_KEY 等"
+echo
+echo "==> 可选：安装 Cursor 扩展"
+echo "    # 需要 cursor CLI 在 PATH 中"
+echo "    xargs -n1 cursor --install-extension < $REPO_DIR/cursor/extensions.txt"
 echo
 echo "✅ 安装完成"
