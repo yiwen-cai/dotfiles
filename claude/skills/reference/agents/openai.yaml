@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reference"
+  short_description: "从文档代码测试与历史中提取可验证事实并建立参考基线"
+  default_prompt: "Use $reference to identify authoritative references and establish the known facts before proceeding."

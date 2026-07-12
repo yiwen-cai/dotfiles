@@ -33,6 +33,12 @@
 └── .gitignore
 ```
 
+## 交付技能链路
+
+`claude/skills/` 与 `codex/skills/` 中同步了同一套交付流程技能（Cursor 源在 `~/.cursor/skills/`）：
+
+`blindspot-pass → brainstorm → interview → reference → planning → implement → explaination → quiz`
+
 ## 在新机器上安装
 
 ```bash

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Interview"
+  short_description: "在头脑风暴后逐问确认会改变执行做法的已知未知与验收标准"
+  default_prompt: "Use $interview to interview me one consequential question at a time and finalize the requirements."

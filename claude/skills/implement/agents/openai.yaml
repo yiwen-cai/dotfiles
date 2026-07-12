@@ -1,0 +1,4 @@
+interface:
+  display_name: "Implement"
+  short_description: "在计划批准后以目标驱动模式多代理执行并维护决策改动笔记"
+  default_prompt: "Use $implement to execute the approved plan with multiple agents while maintaining an agent-facing implementation log."

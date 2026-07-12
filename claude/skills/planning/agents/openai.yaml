@@ -1,0 +1,4 @@
+interface:
+  display_name: "Planning"
+  short_description: "进入计划模式并优先锁定高返工代价高不确定性的关键决策"
+  default_prompt: "Use $planning to enter Plan Mode and produce a decision-first implementation plan ordered by rework cost."

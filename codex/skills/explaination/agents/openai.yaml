@@ -1,0 +1,4 @@
+interface:
+  display_name: "Explaination"
+  short_description: "根据计划执行笔记代码与测试生成人类易读的交付讲解文档"
+  default_prompt: "Use $explaination to create a human-readable Markdown explanation from the plan, implementation notes, code changes, and verification evidence."
