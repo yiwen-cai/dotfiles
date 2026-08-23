@@ -1,0 +1,54 @@
+# Installed by install.sh. The wrapper selects Homebrew LLVM, clangd-22, or a
+# HELIX_CLANGD override without making this file machine-specific.
+[language-server.clangd]
+command = "clangd-helix"
+args = [
+  "--background-index",
+  "--background-index-priority=background",
+  "-j=4",
+  "--header-insertion=never",
+  "--completion-style=detailed",
+  "--enable-config",
+  "--log=error",
+]
+
+# Keep CUDA indexing isolated from ordinary C/C++ files. Project .clangd and
+# compile_flags.txt files provide toolkit headers and target-specific flags.
+[language-server.clangd-cuda]
+command = "clangd-helix"
+args = [
+  "--background-index",
+  "--background-index-priority=background",
+  "-j=4",
+  "--header-insertion=never",
+  "--completion-style=detailed",
+  "--enable-config",
+  "--strong-workspace-mode",
+  "--log=error",
+]
+
+[language-server.clangd-cuda.config]
+fallbackFlags = [
+  "-std=c++17",
+  "-I.",
+]
+
+# Helix 25.07.1 classifies .cu/.cuh as C++ by default. Give CUDA an independent
+# language scope while reusing the C++ parser and LSP language ID.
+[[language]]
+name = "cuda"
+language-id = "cpp"
+scope = "source.cuda"
+file-types = ["cu", "cuh"]
+roots = [
+  "compile_commands.json",
+  "compile_flags.txt",
+  ".clangd",
+  "CMakeLists.txt",
+  ".git",
+]
+comment-token = "//"
+block-comment-tokens = { start = "/*", end = "*/" }
+language-servers = ["clangd-cuda"]
+indent = { tab-width = 2, unit = "  " }
+grammar = "cpp"

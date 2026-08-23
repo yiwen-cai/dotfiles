@@ -7,7 +7,7 @@ Real-world authentication issues encountered when working with multiple provider
 **Pitfall:** Reusing the same API key across different providers.
 
 **Example from session:**
-- `REMOVED_SECRET` worked for `nowcoding.ai` (returned 200, model list included gpt-5.5)
+- `NOWCODING_API_KEY` worked for `nowcoding.ai` (returned 200, model list included gpt-5.5)
 - Same key failed for `api.kimi.com/coding` with `invalid_authentication_error`
 
 **Rule:** Each provider requires its own key. Verify each independently.

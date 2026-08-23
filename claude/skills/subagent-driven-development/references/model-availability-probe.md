@@ -10,21 +10,21 @@ Run this before ANY delegation session to confirm models are reachable.
 # Probe nowcoding/gpt-5.5 (main agent)
 curl -s -X POST https://nowcoding.ai/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $API_KEY" \
+  -H "Authorization: Bearer $NOWCODING_API_KEY" \
   -d '{"model":"gpt-5.5","messages":[{"role":"user","content":"OK"}],"max_tokens":2}' \
   | python3 -c "import sys,json; d=json.load(sys.stdin); print('✅ gpt-5.5 OK' if 'choices' in d else f'❌ gpt-5.5 FAIL: {d}')"
 
 # Probe nowcoding/gpt-5.3-codex (fallback subagent)
 curl -s -X POST https://nowcoding.ai/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $API_KEY" \
+  -H "Authorization: Bearer $NOWCODING_API_KEY" \
   -d '{"model":"gpt-5.3-codex","messages":[{"role":"user","content":"OK"}],"max_tokens":2}' \
   | python3 -c "import sys,json; d=json.load(sys.stdin); print('✅ gpt-5.3-codex OK' if 'choices' in d else f'❌ gpt-5.3-codex FAIL: {d}')"
 
 # Probe kimi-k2.6 (preferred subagent — requires special headers, likely fails in Hermes)
 curl -s -X POST https://api.kimi.com/coding/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $API_KEY" \
+  -H "Authorization: Bearer $KIMI_API_KEY" \
   -H "x-coding-agent: claude-code" \
   -H "User-Agent: claude-code/0.1" \
   -d '{"model":"kimi-k2.6","messages":[{"role":"user","content":"OK"}],"max_tokens":2}' \
@@ -37,7 +37,7 @@ curl -s -X POST https://api.kimi.com/coding/v1/chat/completions \
 - Standard OpenAI-compatible endpoint: `https://nowcoding.ai/v1`
 - Bearer token auth with `sk-` prefix key
 - All `gpt-5.*` models available EXCEPT `*-openai-compact` variants (ChatGPT account restriction)
-- Key: `REMOVED_SECRET`
+- Key: set via `NOWCODING_API_KEY`
 
 ### kimi-coding (api.kimi.com/coding)
 - **NOT standard OpenAI-compatible** — requires special headers:
@@ -45,7 +45,7 @@ curl -s -X POST https://api.kimi.com/coding/v1/chat/completions \
   - `User-Agent: claude-code/0.1`
 - Without these headers: `access_terminated_error`
 - Hermes `delegate_task` does NOT send these headers, so **unavailable for subagent use**
-- Key: `REMOVED_SECRET`
+- Key: set via `KIMI_API_KEY`
 - Actual returned model name: `kimi-for-coding`
 
 ## Fallback Priority (when preferred models fail)

@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Resolve a suitable clangd without baking one machine's package-manager path
+# into Helix's languages.toml.
+set -euo pipefail
+
+if [[ -n "${HELIX_CLANGD:-}" ]]; then
+  override_path="$(command -v "$HELIX_CLANGD" 2>/dev/null || true)"
+  if [[ -z "$override_path" || ! -x "$override_path" ]]; then
+    printf 'clangd-helix: HELIX_CLANGD is not executable: %s\n' "$HELIX_CLANGD" >&2
+    exit 127
+  fi
+  if [[ "$override_path" -ef "$0" ]]; then
+    printf 'clangd-helix: HELIX_CLANGD resolves to this wrapper\n' >&2
+    exit 126
+  fi
+  exec "$override_path" "$@"
+fi
+
+candidates=(
+  /opt/homebrew/opt/llvm/bin/clangd
+  /usr/local/opt/llvm/bin/clangd
+  /usr/bin/clangd-22
+  /usr/local/bin/clangd-22
+  /usr/bin/clangd
+)
+
+for candidate_path in "${candidates[@]}"; do
+  if [[ -x "$candidate_path" ]]; then
+    exec "$candidate_path" "$@"
+  fi
+done
+
+for candidate_name in clangd-22 clangd; do
+  candidate_path="$(command -v "$candidate_name" 2>/dev/null || true)"
+  if [[ -n "$candidate_path" && -x "$candidate_path" && ! "$candidate_path" -ef "$0" ]]; then
+    exec "$candidate_path" "$@"
+  fi
+done
+
+printf '%s\n' \
+  'clangd-helix: clangd not found.' \
+  'Install Homebrew llvm on macOS or clangd-22 on Linux,' \
+  'or set HELIX_CLANGD to an executable clangd path.' >&2
+exit 127

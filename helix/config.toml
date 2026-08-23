@@ -1,0 +1,75 @@
+[editor]
+line-number = "relative"
+cursorline = true
+bufferline = "multiple"
+color-modes = true
+rulers = [100]
+text-width = 100
+scrolloff = 8
+popup-border = "all"
+true-color = true
+shell = ["bash", "-c"]
+
+# Keep formatting explicit so performance-oriented code changes stay reviewable.
+auto-format = false
+
+completion-timeout = 200
+completion-trigger-len = 2
+preview-completion-insert = false
+end-of-line-diagnostics = "error"
+
+# Let Helix select the native provider for the current platform. SSH users can
+# set this to "termcode" in a machine-local variant when OSC 52 is preferred.
+gutters = ["diff", "diagnostics", "line-numbers", "spacer"]
+
+[editor.cursor-shape]
+normal = "block"
+insert = "bar"
+select = "underline"
+
+[editor.statusline]
+left = ["mode", "spinner", "file-name", "file-modification-indicator"]
+right = ["diagnostics", "version-control", "file-type", "position"]
+separator = "│"
+mode.normal = "NOR"
+mode.insert = "INS"
+mode.select = "SEL"
+diagnostics = ["warning", "error"]
+workspace-diagnostics = ["warning", "error"]
+
+[editor.lsp]
+display-messages = true
+display-progress-messages = false
+auto-signature-help = true
+display-inlay-hints = false
+inlay-hints-length-limit = 40
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
+other-lines = "disable"
+max-diagnostics = 2
+
+[editor.indent-guides]
+render = true
+character = "╎"
+skip-levels = 1
+
+[editor.whitespace.render]
+tab = "all"
+space = "none"
+nbsp = "all"
+nnbsp = "all"
+newline = "none"
+
+[editor.file-picker]
+hidden = false
+git-ignore = true
+git-global = true
+git-exclude = true
+follow-symlinks = false
+
+[keys.normal.space]
+m = ":format"
+i = ":toggle lsp.display-inlay-hints"
+l = ":lsp-restart"
+L = ":lsp-stop"

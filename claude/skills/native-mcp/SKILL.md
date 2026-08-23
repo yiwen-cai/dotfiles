@@ -289,7 +289,7 @@ mcp_servers:
   company_api:
     url: "https://mcp.mycompany.com/v1/mcp"
     headers:
-      Authorization: "Bearer REMOVED_SECRET"
+      Authorization: "Bearer <your-api-key>"
       X-Team-Id: "engineering"
     timeout: 180
     connect_timeout: 30
@@ -316,7 +316,7 @@ mcp_servers:
   company_api:
     url: "https://mcp.internal.company.com/mcp"
     headers:
-      Authorization: "Bearer REMOVED_SECRET"
+      Authorization: "Bearer <your-api-key>"
     timeout: 300
 ```
 

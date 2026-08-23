@@ -28,7 +28,7 @@
 providers:
   nowcoding:
     base_url: https://nowcoding.ai/v1
-    api_key: REMOVED_SECRET
+    api_key: "<your-nowcoding-api-key>"
     models:
       - gpt-5.5
       - gpt-5.5-openai-compact

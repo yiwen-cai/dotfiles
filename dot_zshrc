@@ -13,7 +13,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ ! -f "$HOME/.x-cmd.root/X" ] || . "$HOME/.x-cmd.root/X" # boot up x-cmd.
-export OPENAI_API_KEY=REMOVED_SECRET
+# Load credentials from a machine-local file that is never tracked by this repo.
+dotfiles_secrets_file="${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles/secrets.zsh"
+if [[ -r "$dotfiles_secrets_file" ]]; then
+  source "$dotfiles_secrets_file"
+fi
+unset dotfiles_secrets_file
 alias ll='ls -al'
 alias v='nvim'
 alias vc='cd ~/.config/nvim && nvim .' 

@@ -569,7 +569,7 @@ curl -s https://api.kimi.com/coding/v1/chat/completions \
   -d '{"model":"kimi-k2.6","messages":[{"role":"user","content":"Say OK"}],"max_tokens":5}'
 ```
 
-**Key insight from real session:** A single API key may work for one provider but fail for another. The nowcoding key (`REMOVED_SECRET`) worked for `nowcoding.ai` but returned `invalid_authentication_error` for `api.kimi.com/coding`. Each provider requires its own valid key — verify independently.
+**Key insight from real session:** A key configured as `NOWCODING_API_KEY` may work for one provider but fail for another. The nowcoding key worked for `nowcoding.ai` but returned `invalid_authentication_error` for `api.kimi.com/coding`. Each provider requires its own valid key — verify independently.
 
 ## Real-world example: See `references/nowcoding-provider.md` for a complete working config (nowcoding.ai with gpt-5.5 models).
 

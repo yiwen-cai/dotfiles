@@ -1,0 +1,17 @@
+title = "dotfiles secret scanning"
+
+[extend]
+useDefault = true
+
+# The phrase `assignment/default` describes a test shape, but the generic API
+# key rule interprets it as a key/value pair. Restrict this exception to the two
+# mirrored QA skill files and the exact extracted value.
+[[rules]]
+id = "generic-api-key"
+
+  [[rules.allowlists]]
+  description = "Allow the documented assignment/default test shape"
+  condition = "AND"
+  regexTarget = "secret"
+  regexes = ['''^assignment/default$''']
+  paths = ['''^(claude|codex)/skills/testing-quality-assurance/SKILL\.md$''']

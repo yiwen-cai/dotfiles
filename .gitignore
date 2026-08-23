@@ -21,6 +21,8 @@ cursor/mcp.json
 id_ed25519
 .env
 !.env.example
+secrets.zsh
+!secrets.zsh.example
 !.gitignore
 
 # ============================================================

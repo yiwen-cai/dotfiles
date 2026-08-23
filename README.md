@@ -1,6 +1,6 @@
 # dotfiles
 
-个人终端开发环境配置仓库，同步 Claude Code、Codex 与 Cursor 的配置及 skills。
+个人终端开发环境配置仓库，同步 Claude Code、Codex、Cursor 与 Helix 的配置及 skills。
 
 ## 仓库结构
 
@@ -28,7 +28,13 @@
 │   ├── cli-config.json          # Cursor CLI 配置
 │   ├── mcp.json.example         # MCP 模板 (含密钥占位符)
 │   └── extensions.txt           # 扩展 ID 列表
+├── helix/                       # Helix 配置 (~/.config/helix)
+│   ├── config.toml              # 编辑器行为、诊断与快捷键
+│   ├── languages.toml           # 可移植 clangd 与独立 CUDA 语言
+│   ├── bin/clangd-helix         # macOS/Linux clangd 自动选择器
+│   └── runtime/queries/cuda/    # CUDA 复用 C++ tree-sitter queries
 ├── dot_zshrc                    # zsh 配置
+├── secrets.zsh.example          # 本机密钥模板（实际文件放在仓库外）
 ├── install.sh                   # 一键安装脚本
 └── .gitignore
 ```
@@ -47,7 +53,7 @@ cd ~/Documents/code/dotfiles
 ./install.sh
 ```
 
-脚本会把配置软链接到 `~/.claude`、`~/.codex`、`~/.cursor` 以及
+脚本会把配置软链接到 `~/.claude`、`~/.codex`、`~/.cursor`、`~/.config/helix` 以及
 `~/Library/Application Support/Cursor/User/`（macOS）。
 
 > 已存在的文件会 skip，不会覆盖本机现有配置。
@@ -57,6 +63,22 @@ cd ~/Documents/code/dotfiles
 ```bash
 xargs -n1 cursor --install-extension < cursor/extensions.txt
 ```
+
+### Helix 与 C/C++/CUDA LSP
+
+Apple Silicon macOS 使用 Homebrew 的 Helix 和 LLVM 22：
+
+```bash
+brew install helix llvm
+hx --health cpp
+hx --health cuda
+```
+
+`languages.toml` 通过仓库内的 `clangd-helix` 启动器自动选择 Homebrew LLVM、
+Linux `clangd-22` 或系统 clangd；也可以用 `HELIX_CLANGD` 覆盖。CUDA 在 macOS
+上仅提供编辑器语义能力，具体项目仍需通过 `.clangd`、`compile_flags.txt` 或
+`compile_commands.json` 提供 vendored CUDA headers 与真实编译参数；不能在
+macOS 本机编译或运行 CUDA kernel。完整说明见 [`helix/README.md`](helix/README.md)。
 
 ### 本机路径说明
 
@@ -75,17 +97,24 @@ cp claude/config.json.example    ~/.claude/config.json     # 填 primaryApiKey
 cp codex/auth.json.example       ~/.codex/auth.json        # 填 OPENAI_API_KEY
 cp codex/.env.example            ~/.codex/.env             # 填代理地址
 cp cursor/mcp.json.example       ~/.cursor/mcp.json        # 填 TAVILY_API_KEY 等
+cp secrets.zsh.example           ~/.config/dotfiles/secrets.zsh
+chmod 600 ~/.config/dotfiles/secrets.zsh
 ```
 
-> 真实密钥文件已在 `.gitignore` 中排除，绝不会上传。
+`dot_zshrc` 只会加载仓库外的 `~/.config/dotfiles/secrets.zsh`，不会保存明文
+API key。请在该本机文件中填写需要导出的环境变量，例如 `OPENAI_API_KEY`。
+
+> 真实密钥文件已在 `.gitignore` 中排除；提交前仍应执行 secret scan。已经提交过的
+> 密钥必须先轮换，之后再单独评估是否需要重写 Git 历史。
 
 ## 安全说明
 
 - **绝不上传**：Claude 的 `settings.json` / `config.json`、Codex 的 `auth.json` / `.env`、
-  Cursor 的 `mcp.json`、以及 `*.sqlite`、`*.pem`、`id_ed25519` 等
+  Cursor 的 `mcp.json`、`~/.config/dotfiles/secrets.zsh`，以及 `*.sqlite`、`*.pem`、
+  `id_ed25519` 等
 - 含密钥的配置只提供 `.example` 脱敏模板
 - Cursor 的 `settings.json` / `keybindings.json` / `hooks.json` 不含密钥，正常同步
-- 如担心泄露，安装后可用 `git log -p` 自查历史
+- 提交前运行 `gitleaks dir .` 扫描当前文件，运行 `gitleaks git .` 扫描完整历史
 
 ## 更新配置
 

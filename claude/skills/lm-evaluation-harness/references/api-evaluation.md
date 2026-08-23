@@ -33,7 +33,7 @@ The lm-evaluation-harness supports evaluating API-based models through a unified
 ### Setup
 
 ```bash
-export OPENAI_API_KEY=sk-...
+export OPENAI_API_KEY="<your-openai-api-key>"
 ```
 
 ### Completion Models (Legacy)

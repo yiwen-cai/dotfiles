@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # dotfiles 一键安装脚本
 # 用法: ./install.sh
-# 功能: 把仓库内的配置软链接到 ~/.claude、~/.codex 和 Cursor 对应位置
+# 功能: 把仓库内的配置软链接到 Claude、Codex、Cursor 和 Helix 对应位置
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -9,6 +9,9 @@ CLAUDE_HOME="$HOME/.claude"
 CODEX_HOME="$HOME/.codex"
 CURSOR_HOME="$HOME/.cursor"
 CURSOR_USER="$HOME/Library/Application Support/Cursor/User"
+HELIX_HOME="$HOME/.config/helix"
+LOCAL_BIN="$HOME/.local/bin"
+LOCAL_SECRETS="$HOME/.config/dotfiles/secrets.zsh"
 
 ln_safe() {
   # ln_safe <源文件> <目标>
@@ -26,10 +29,10 @@ copy_if_missing() {
   # copy_if_missing <源文件> <目标>  (用于含密钥的文件，不做软链接)
   local src="$1" dst="$2"
   mkdir -p "$(dirname "$dst")"
-  if [ -e "$dst" ]; then
+  if [ -e "$dst" ] || [ -L "$dst" ]; then
     echo "  [skip] 已存在: $dst"
   else
-    cp "$src" "$dst"
+    (umask 077; cp "$src" "$dst")
     echo "  [copy] $dst (来自 $src)"
   fi
 }
@@ -112,6 +115,25 @@ fi
 ln_safe "$REPO_DIR/cursor/hooks.json"       "$CURSOR_HOME/hooks.json"
 ln_safe "$REPO_DIR/cursor/cli-config.json"  "$CURSOR_HOME/cli-config.json"
 
+echo "==> 安装 Helix 配置"
+ln_safe "$REPO_DIR/helix/config.toml" "$HELIX_HOME/config.toml"
+ln_safe "$REPO_DIR/helix/languages.toml" "$HELIX_HOME/languages.toml"
+ln_safe "$REPO_DIR/helix/runtime/queries/cuda" \
+  "$HELIX_HOME/runtime/queries/cuda"
+ln_safe "$REPO_DIR/helix/bin/clangd-helix" "$LOCAL_BIN/clangd-helix"
+case ":$PATH:" in
+  *":$LOCAL_BIN:"*) ;;
+  *) echo "  [warn] 请将 $LOCAL_BIN 加入 PATH，Helix 才能找到 clangd-helix" ;;
+esac
+
+echo "==> 准备本机密钥配置"
+copy_if_missing "$REPO_DIR/secrets.zsh.example" "$LOCAL_SECRETS"
+if [ -f "$LOCAL_SECRETS" ] && [ ! -L "$LOCAL_SECRETS" ]; then
+  chmod 600 "$LOCAL_SECRETS"
+else
+  echo "  [warn] $LOCAL_SECRETS 不是普通文件，未修改其权限"
+fi
+
 echo
 echo "==> 需要手动填写的密钥文件（已提供 .example 模板）"
 echo "    cd $REPO_DIR"
@@ -120,6 +142,7 @@ echo "    cp claude/config.json.example    ~/.claude/config.json     # 然后编
 echo "    cp codex/auth.json.example       ~/.codex/auth.json        # 然后编辑填入 OPENAI_API_KEY"
 echo "    cp codex/.env.example            ~/.codex/.env             # 然后编辑填入代理"
 echo "    cp cursor/mcp.json.example       ~/.cursor/mcp.json        # 然后编辑填入 TAVILY_API_KEY 等"
+echo "    $LOCAL_SECRETS                    # 填本机环境变量，不要提交"
 echo
 echo "==> 可选：安装 Cursor 扩展"
 echo "    # 需要 cursor CLI 在 PATH 中"
