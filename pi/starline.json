@@ -15,13 +15,5 @@
     "gitCounts": false,
     "gitCommit": false,
     "gitMetrics": false
-  },
-  "extensionStatuses": {
-    "placements": {
-      "codex-status": "off"
-    },
-    "colorModes": {
-      "codex-status": "themed"
-    }
   }
 }

@@ -13,8 +13,6 @@
     "npm:@narumitw/pi-btw",
     "npm:pi-starline",
     "npm:pi-web-access",
-    "npm:pi-codex-fast-mode",
-    "npm:pi-codex-status",
     "npm:pi-catppuccin",
     "npm:@narumitw/pi-plan-mode"
   ],

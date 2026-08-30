@@ -12,7 +12,6 @@ SKILL_TARGETS=(
   "claude|$HOME/.claude/skills|yes|bupt-thesis-writer,cuda-skill,cutlass-skill,sglang-skill,triton-skill"
   "codex|$HOME/.codex/skills|yes|bupt-thesis-writer"
   "zcode|$HOME/.zcode/skills|yes|"
-  "agents|$HOME/.agents/skills|no|cuda-skill,cutlass-skill,sglang-skill,triton-skill"
 )
 
 # 构建部署视图：白名单内的本地技能以符号链接形式放进 staging 目录，
