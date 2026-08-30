@@ -1,0 +1,4 @@
+interface:
+  display_name: "BUPT Thesis Writer"
+  short_description: "BUPT本科毕设论文写作与LaTeX模板助手"
+  default_prompt: "Use $bupt-thesis-writer to draft, convert, and validate my BUPT bachelor thesis with the LaTeX template."

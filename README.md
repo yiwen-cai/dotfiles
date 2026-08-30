@@ -6,12 +6,17 @@
 
 ```
 .
+├── skills/                      # 技能单一事实源（全量，部署到所有工具）
+├── skills-local/                # 本机专属技能（按工具白名单部署）
+├── scripts/
+│   ├── check-skills.sh          # skills 结构与部署一致性校验
+│   └── skills-targets.sh        # 部署目标定义（install.sh 共用）
 ├── claude/                      # Claude Code 配置 (~/.claude)
 │   ├── CLAUDE.md                # 全局指令
 │   ├── hermes-rules.md          # Hermes 规则
 │   ├── settings.json.example    # 设置模板 (含密钥占位符)
 │   ├── config.json.example      # API key 模板
-│   └── skills/                  # 自定义 skills
+│   └── skills → ../skills       # 兼容软链接（勿放入真实目录）
 ├── codex/                       # Codex 配置 (~/.codex)
 │   ├── AGENTS.md
 │   ├── config.toml              # Codex 主配置 (无密钥)
@@ -19,7 +24,7 @@
 │   ├── .env.example             # 环境变量模板
 │   ├── rules/
 │   │   └── default.rules
-│   └── skills/                  # 自定义 skills
+│   └── skills → ../skills       # 兼容软链接（勿放入真实目录）
 ├── cursor/                      # Cursor 配置
 │   ├── settings.json            # 编辑器设置 (-> Application Support/.../User)
 │   ├── keybindings.json         # 快捷键
@@ -39,9 +44,25 @@
 └── .gitignore
 ```
 
-## 交付技能链路
+## 技能组织（单一事实源）
 
-`claude/skills/` 与 `codex/skills/` 中同步了同一套交付流程技能（Cursor 源在 `~/.cursor/skills/`）：
+所有技能只维护一份，放在 `skills/`；`claude/skills` 与 `codex/skills` 只是兼容软链接。
+`install.sh` 把 `skills/`（全量）+ `skills-local/`（按白名单）rsync 部署到：
+
+| 目标 | 目录 | 部署主树 | 本地技能白名单 |
+|------|------|----------|----------------|
+| Claude | `~/.claude/skills` | 是 | bupt-thesis-writer, cuda-skill, cutlass-skill, sglang-skill, triton-skill |
+| Codex | `~/.codex/skills` | 是 | bupt-thesis-writer |
+| zcode | `~/.zcode/skills` | 是 | — |
+| agents | `~/.agents/skills` | 否（仅本地） | cuda-skill, cutlass-skill, sglang-skill, triton-skill |
+
+- 部署用 `rsync -aO --delete` 全权收敛，目标目录以仓库为准；`--exclude='.system'` 保护 Codex 内置技能目录。
+- 白名单内的本地技能以**符号链接**形式部署（指向 `skills-local/`），不复制内容；改动仓库后重新运行 install.sh 即生效。
+- 本地 GPU 技能（cuda/cutlass/sglang/triton-skill）内部的 `references`/`repos` 符号链接指向 `~/code/agent-gpu-skills`（github.com/slowlyC/agent-gpu-skills），新机器需先 clone 该仓库。
+- 技能间交叉引用一律按技能名（如「先执行 blindspot-pass」），禁止写 `~/.claude/skills/<x>/SKILL.md` 这类路径——那是当初 claude/codex 双树分叉的根源。
+- 改完技能后先运行 `scripts/check-skills.sh --deployed` 校验，再运行 `./install.sh` 部署。
+
+交付流程链路（同一套技能，各工具通用）：
 
 `blindspot-pass → brainstorm → interview → reference → planning → implement → explaination → quiz`
 
@@ -118,7 +139,8 @@ API key。请在该本机文件中填写需要导出的环境变量，例如 `OP
 
 ## 更新配置
 
-本仓库配置用软链接安装，所以直接编辑 `~/.claude/CLAUDE.md` 等文件就是编辑仓库内容。更新后：
+大部分配置（`~/.claude/CLAUDE.md` 等）用软链接安装，直接编辑本仓库文件即生效；
+skills 目录不是软链接，修改 `skills/` 或 `skills-local/` 后需重新运行 `./install.sh` 部署。更新后：
 
 ```bash
 cd ~/Documents/code/dotfiles

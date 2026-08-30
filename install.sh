@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # dotfiles 一键安装脚本
 # 用法: ./install.sh
-# 功能: 把仓库内的配置软链接到 Claude、Codex、Cursor 和 Helix 对应位置
+# 功能: 把仓库内的配置软链接到 Claude、Codex、Cursor 和 Helix 对应位置；
+#       skills 由单一事实源（repo/skills + repo/skills-local）rsync 部署到各工具目录
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -42,62 +43,52 @@ mkdir -p "$CLAUDE_HOME"
 # 普通配置：软链接
 ln_safe "$REPO_DIR/claude/CLAUDE.md"        "$CLAUDE_HOME/CLAUDE.md"
 ln_safe "$REPO_DIR/claude/hermes-rules.md"  "$CLAUDE_HOME/hermes-rules.md"
-# skills：目录不存在则整目录软链接；已存在则逐个 skill 同步（避免远程已有 skills 时被跳过）
-sync_skills() {
-  # sync_skills <repo_skills_dir> <target_skills_dir>
-  local src_root="$1" dst_root="$2"
-  mkdir -p "$dst_root"
-  if [ ! -e "$dst_root" ] || [ -L "$dst_root" ]; then
-    # missing or already a symlink to our repo: prefer whole-dir link when missing
-    if [ ! -e "$dst_root" ]; then
-      ln_safe "$src_root" "$dst_root"
-      return
-    fi
+
+echo "==> 部署 skills（单一事实源: repo/skills + repo/skills-local）"
+# shellcheck source=scripts/skills-targets.sh
+source "$REPO_DIR/scripts/skills-targets.sh"
+
+deploy_skills() {
+  # deploy_skills <目标名> <目标目录> <部署主树:yes/no> <本地技能白名单(逗号分隔)>
+  local label="$1" dst="$2" main_tree="$3" locals="$4" stage srcs=()
+  stage="$(build_skill_stage "$locals")"
+  [ "$main_tree" = "yes" ] && srcs+=("$REPO_DIR/skills/")
+  srcs+=("$stage/")
+  mkdir -p "$dst"
+  # 旧版整目录软链接 → 改为独立管理的真实目录
+  if [ -L "$dst" ]; then
+    echo "  [info] $label: 移除旧的整目录软链接，改为 rsync 管理"
+    rm "$dst"
+    mkdir -p "$dst"
   fi
-  local skill
-  for skill in "$src_root"/*; do
-    [ -d "$skill" ] || continue
-    local name
-    name="$(basename "$skill")"
-    mkdir -p "$dst_root/$name"
-    # Prefer rsync when available; fall back to cp -R
-    if command -v rsync >/dev/null 2>&1; then
-      rsync -a --delete "$skill/" "$dst_root/$name/"
-    else
-      rm -rf "${dst_root:?}/$name"
-      mkdir -p "$dst_root/$name"
-      cp -R "$skill/." "$dst_root/$name/"
-    fi
-    echo "  [sync] $dst_root/$name"
-  done
+  # --exclude='.system': 保护 Codex 内置技能目录（不得删除）
+  local dry
+  dry="$(rsync -ainO --delete --exclude='.system' \
+         "${srcs[@]}" "$dst/" 2>&1 \
+         | grep -vE '^sending|^sent |^total |^$' || true)"
+  if [ -n "$dry" ]; then
+    echo "  [sync] $label ($(echo "$dry" | wc -l) 项变更)"
+    echo "$dry" | sed 's/^/         /' | head -12 || true
+    rsync -aO --delete --exclude='.system' "${srcs[@]}" "$dst/"
+    echo "  [done] $label -> $dst"
+  else
+    echo "  [ok] $label 已是最新 ($dst)"
+  fi
+  rm -rf "$stage"
 }
 
-if [ -d "$REPO_DIR/claude/skills" ]; then
-  if [ ! -e "$CLAUDE_HOME/skills" ]; then
-    ln_safe "$REPO_DIR/claude/skills" "$CLAUDE_HOME/skills"
-  elif [ -L "$CLAUDE_HOME/skills" ]; then
-    echo "  [skip] 已是软链接: $CLAUDE_HOME/skills"
-  else
-    echo "  [merge] 同步 skills 到已有目录 $CLAUDE_HOME/skills"
-    sync_skills "$REPO_DIR/claude/skills" "$CLAUDE_HOME/skills"
-  fi
-fi
+for _t in "${SKILL_TARGETS[@]}"; do
+  _label="${_t%%|*}"; _rest="${_t#*|}"
+  _dst="${_rest%%|*}"; _rest="${_rest#*|}"
+  _main="${_rest%%|*}"; _locals="${_rest#*|}"
+  deploy_skills "$_label" "$_dst" "$_main" "$_locals"
+done
 
 echo "==> 安装 Codex 配置"
 mkdir -p "$CODEX_HOME"
 ln_safe "$REPO_DIR/codex/AGENTS.md"          "$CODEX_HOME/AGENTS.md"
 ln_safe "$REPO_DIR/codex/config.toml"        "$CODEX_HOME/config.toml"
 ln_safe "$REPO_DIR/codex/rules/default.rules" "$CODEX_HOME/rules/default.rules"
-if [ -d "$REPO_DIR/codex/skills" ]; then
-  if [ ! -e "$CODEX_HOME/skills" ]; then
-    ln_safe "$REPO_DIR/codex/skills" "$CODEX_HOME/skills"
-  elif [ -L "$CODEX_HOME/skills" ]; then
-    echo "  [skip] 已是软链接: $CODEX_HOME/skills"
-  else
-    echo "  [merge] 同步 skills 到已有目录 $CODEX_HOME/skills"
-    sync_skills "$REPO_DIR/codex/skills" "$CODEX_HOME/skills"
-  fi
-fi
 
 echo "==> 安装 Cursor 配置"
 mkdir -p "$CURSOR_HOME" "$CURSOR_USER"

@@ -41,3 +41,9 @@ backups/
 sessions/
 history.*
 stats-cache.json
+
+# ============================================================
+# 本地技能内的大体积参考仓库（skills-local/*/repos/）
+# 不进 git；部署时 rsync 排除，本机已有 checkout 保留
+# ============================================================
+skills-local/*/repos/
