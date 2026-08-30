@@ -4,8 +4,8 @@
     "~/Documents/code/dotfiles/skills"
   ],
   "theme": "catppuccin-frappe",
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.6-luna",
+  "defaultProvider": "deepseek",
+  "defaultModel": "deepseek-v4-flash",
   "defaultThinkingLevel": "max",
   "packages": [
     "npm:pi-subagents",

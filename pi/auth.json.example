@@ -2,12 +2,5 @@
   "deepseek": {
     "type": "api_key",
     "key": "sk-REPLACE_ME"
-  },
-  "openai-codex": {
-    "type": "oauth",
-    "access": "REPLACE_ME",
-    "refresh": "REPLACE_ME",
-    "expires": 0,
-    "accountId": "REPLACE_ME"
   }
 }
