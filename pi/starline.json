@@ -1,0 +1,27 @@
+{
+  "colorSources": {
+    "starship": "theme",
+    "editor": "theme",
+    "userMessages": "theme"
+  },
+  "footerSegments": {
+    "cost": false,
+    "tokens": true,
+    "runtime": true,
+    "os": false,
+    "time": false,
+    "username": false,
+    "sessionDuration": false,
+    "gitCounts": false,
+    "gitCommit": false,
+    "gitMetrics": false
+  },
+  "extensionStatuses": {
+    "placements": {
+      "codex-status": "off"
+    },
+    "colorModes": {
+      "codex-status": "themed"
+    }
+  }
+}

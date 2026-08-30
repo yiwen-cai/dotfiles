@@ -90,6 +90,18 @@ ln_safe "$REPO_DIR/codex/AGENTS.md"          "$CODEX_HOME/AGENTS.md"
 ln_safe "$REPO_DIR/codex/config.toml"        "$CODEX_HOME/config.toml"
 ln_safe "$REPO_DIR/codex/rules/default.rules" "$CODEX_HOME/rules/default.rules"
 
+echo "==> 安装 pi agent 配置"
+PI_HOME="$HOME/.pi/agent"
+mkdir -p "$PI_HOME/extensions"
+# 主配置：软链接（pi 会回写 lastChangelogVersion，属正常；见 pi/README.md）
+ln_safe "$REPO_DIR/pi/settings.json"  "$PI_HOME/settings.json"
+ln_safe "$REPO_DIR/pi/starline.json"  "$PI_HOME/starline.json"
+# 含密钥的文件：只复制模板，绝不覆盖本机真实文件
+copy_if_missing "$REPO_DIR/pi/auth.json.example" "$PI_HOME/auth.json"
+copy_if_missing "$REPO_DIR/pi/extensions/nowcoding.ts"        "$PI_HOME/extensions/nowcoding.ts"
+copy_if_missing "$REPO_DIR/pi/extensions/nowcoding-claude.ts" "$PI_HOME/extensions/nowcoding-claude.ts"
+echo "  [hint] 新机器需手动填写 ~/.pi/agent/auth.json 与 extensions 中的 apiKey（见 pi/README.md）"
+
 echo "==> 安装 Cursor 配置"
 mkdir -p "$CURSOR_HOME" "$CURSOR_USER"
 # Editor settings (macOS Application Support)

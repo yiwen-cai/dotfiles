@@ -38,6 +38,12 @@
 │   ├── languages.toml           # 可移植 clangd 与独立 CUDA 语言
 │   ├── bin/clangd-helix         # macOS/Linux clangd 自动选择器
 │   └── runtime/queries/cuda/    # CUDA 复用 C++ tree-sitter queries
+├── pi/                          # pi agent 配置 (~/.pi/agent)
+│   ├── settings.json            # 主配置（软链接）
+│   ├── starline.json            # starline 插件配置（软链接）
+│   ├── auth.json.example        # 认证模板（含密钥，只放占位符）
+│   ├── extensions/              # 自定义 provider 扩展（apiKey 已脱敏）
+│   └── README.md
 ├── dot_zshrc                    # zsh 配置
 ├── secrets.zsh.example          # 本机密钥模板（实际文件放在仓库外）
 ├── install.sh                   # 一键安装脚本

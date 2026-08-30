@@ -10,6 +10,9 @@ codex/auth.json
 codex/.env
 # 注意: codex/config.toml 不含密钥，正常上传
 
+# pi（防呆：万一真实密钥文件被拷入仓库）
+pi/auth.json
+
 # Cursor
 cursor/mcp.json
 # 注意: cursor/settings.json、keybindings.json、hooks.json 不含密钥，正常上传
