@@ -141,7 +141,8 @@ class Manager:
             roots.append(root)
             # Roots sharing a discovery group are scanned by the same agent, so a name
             # may live in only one of them; separate groups (other tools) may mirror it.
-            group = discovery.setdefault(target.get('discovery_group', name), [])
+            # Undeclared targets share one group, so mirroring stays explicit.
+            group = discovery.setdefault(target.get('discovery_group', 'default'), [])
             ids = [s for profile in target['profiles'] for s in self.manifest['profiles'][profile]]
             ids += target.get('optional', [])
             if len(ids) != len(set(ids)):

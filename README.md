@@ -73,6 +73,7 @@ Claude Code 的 target 已启用，与 codex 共用 `codex-core` profile，两�
 
 target 的 `discovery_group` 表示"由同一个 agent 扫描的目录集合"：同组内一个技能名只能出现在一处
 （`codex` 与 `agents` 同组，互斥），跨组可以镜像同名技能（`claude` 自成一组，镜像 codex 的 13 个入口）。
+未声明该字段的 target 归入同一个默认组并保持互斥，镜像必须显式声明。
 
 部署器只操作**已登记的名称**，不再对共享目录执行 `rsync --delete`。未知 skill 和 `.system` 原样保留；同名未知目录、用户后续编辑或过期计划会报冲突。
 

@@ -133,9 +133,28 @@ class DeploymentTest(unittest.TestCase):
         self.assertEqual(self.manager.plan(['projects'])['operations'], [])
         self.manager.rollback(result['snapshot']); self.assertEqual(agent.read_text(), before)
 
-    def test_duplicate_global_names_rejected(self):
-        self.manifest['targets']['agents'] = {'enabled': True, 'path': '.agents/skills', 'profiles': ['core']}; self.save()
+    def test_duplicate_global_names_rejected_inside_one_discovery_group(self):
+        # Roots one agent scans together must not expose the same name twice.
+        self.manifest['targets']['codex']['discovery_group'] = 'codex'
+        self.manifest['targets']['agents'] = {'enabled': True, 'path': '.agents/skills', 'profiles': ['core'],
+                                              'discovery_group': 'codex'}; self.save()
         with self.assertRaisesRegex(ValueError, 'Duplicate global'): self.manager.plan(['codex', 'agents'])
+
+    def test_duplicate_global_names_rejected_without_explicit_groups(self):
+        # Undeclared targets share the default group, so mirroring must be opted into.
+        self.manifest['targets']['agents'] = {'enabled': True, 'path': '.agents/skills', 'profiles': ['core']}
+        self.save()
+        with self.assertRaisesRegex(ValueError, 'Duplicate global'): self.manager.plan(['codex', 'agents'])
+
+    def test_separate_discovery_groups_may_mirror_the_same_skill(self):
+        # A different tool's root (Claude Code) mirrors codex instead of colliding with it.
+        self.manifest['targets']['codex']['discovery_group'] = 'codex'
+        self.manifest['targets']['claude'].update({'enabled': True, 'discovery_group': 'claude'}); self.save()
+        self.manager.apply(self.manager.plan(['codex', 'claude']))
+        codex = self.home / '.codex/skills/alpha/SKILL.md'
+        claude = self.home / '.claude/skills/alpha/SKILL.md'
+        self.assertEqual(codex.read_text(), claude.read_text())
+        self.assertEqual(self.manager.plan(['codex', 'claude'])['operations'], [])
 
 
 if __name__ == '__main__': unittest.main()
