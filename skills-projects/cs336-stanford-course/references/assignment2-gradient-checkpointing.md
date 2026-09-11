@@ -98,8 +98,8 @@ Use `use_reentrant=False` for modern PyTorch checkpointing behavior.
 Run one measured backward step per block size and dump one memory snapshot:
 
 ```bash
-export PATH=/storage/caiyiwen/.local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
-cd /storage/caiyiwen/code/cs336/assignment/assignment2-systems
+export PATH=$HOME/.local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+cd $HOME/code/cs336/assignment/assignment2-systems
 mkdir -p traces/checkpoint
 
 for k in 4 6 8; do

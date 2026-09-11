@@ -57,8 +57,8 @@ Create the optimizer after the model is optionally compiled so the measured conf
 A validated small-model command shape:
 
 ```bash
-cd /storage/caiyiwen/code/cs336/assignment/assignment2-systems
-export PATH=/storage/caiyiwen/.local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+cd $HOME/code/cs336/assignment/assignment2-systems
+export PATH=$HOME/.local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
 export CUDA_VISIBLE_DEVICES=1
 for mode in forward backward train; do
   uv run python cs336_systems/benchmark.py \

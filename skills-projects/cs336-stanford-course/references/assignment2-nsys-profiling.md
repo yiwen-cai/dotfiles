@@ -9,8 +9,8 @@ Use this reference for CS336 Assignment 2 section 2.1.4 profiling on `a800`. It 
 Work in:
 
 ```bash
-export PATH=/storage/caiyiwen/.local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
-cd /storage/caiyiwen/code/cs336/assignment/assignment2-systems
+export PATH=$HOME/.local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+cd $HOME/code/cs336/assignment/assignment2-systems
 ```
 
 Commands shown to the user assume they are already inside the remote shell. Agent tool execution still uses `ssh a800`.

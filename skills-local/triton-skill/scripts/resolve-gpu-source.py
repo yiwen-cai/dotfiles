@@ -34,7 +34,8 @@ def main():
         host = os.environ.get('GPU_SKILLS_HOST', 'h100')
         if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.@-]*', host):
             raise ValueError('Invalid GPU_SKILLS_HOST')
-        remote = os.environ.get('GPU_SKILLS_REMOTE_ROOT', '/public/home/caiyiwen/code/agent-gpu-skills')
+        # Relative default resolves against the remote login home; override for other layouts.
+        remote = os.environ.get('GPU_SKILLS_REMOTE_ROOT', 'code/agent-gpu-skills')
         command = shlex.join(['python3', '-c', PROBE, remote, SAMPLES[NAME]])
         raw = subprocess.check_output(['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=10', host, command], text=True, timeout=20)
         result = {'transport': 'ssh', 'host': host, **json.loads(raw)}

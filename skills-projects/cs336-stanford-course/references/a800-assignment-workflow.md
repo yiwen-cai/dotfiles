@@ -9,18 +9,18 @@ The workflow is assignment-first. Start from the current assignment section, tes
 ## Remote Paths
 
 - Local notes/repo root: `/Users/yiwencai/Documents/code/cs336`
-- Remote assignment root: `/storage/caiyiwen/code/cs336/assignment`
-- Assignment 1: `/storage/caiyiwen/code/cs336/assignment/assignment1-basics`
-- Assignment 2: `/storage/caiyiwen/code/cs336/assignment/assignment2-systems`
+- Remote assignment root: `$HOME/code/cs336/assignment`
+- Assignment 1: `$HOME/code/cs336/assignment/assignment1-basics`
+- Assignment 2: `$HOME/code/cs336/assignment/assignment2-systems`
 - Remote host: `a800`
-- Remote `uv`: `/storage/caiyiwen/.local/bin/uv`
+- Remote `uv`: `$HOME/.local/bin/uv`
 
 ## Command Pattern
 
 Prefer commands of this form:
 
 ```bash
-ssh a800 'export PATH=/storage/caiyiwen/.local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH; cd /storage/caiyiwen/code/cs336/assignment/assignment2-systems && uv run pytest -q'
+ssh a800 'export PATH=$HOME/.local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH; cd $HOME/code/cs336/assignment/assignment2-systems && uv run pytest -q'
 ```
 
 When using local double quotes around an SSH command, escape remote `$PATH` as `\$PATH` so the local shell does not expand it prematurely.

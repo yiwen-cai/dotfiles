@@ -9,7 +9,7 @@ When the user says "you can check the remote server" instead of describing work 
 Example direct-gathering pattern used this session:
 ```bash
 # Test suite status
-ssh a800 "export PATH='/storage/caiyiwen/.local/bin:\$PATH' && cd /storage/caiyiwen/code/cs336/assignment/assignment1-basics && uv run pytest tests/ -v"
+ssh a800 "export PATH=\$HOME/.local/bin:\$PATH && cd \$HOME/code/cs336/assignment/assignment1-basics && uv run pytest tests/ -v"
 
 # Code metrics
 ssh a800 "cd ... && wc -l cs336_basics/tokenizer.py && git diff --stat HEAD"
@@ -21,10 +21,10 @@ ssh a800 "cat cs336_basics/tokenizer.py"
 ## Thesis remote context
 
 The user's thesis is maintained on lab, not locally. Key status files:
-- `/public/home/caiyiwen/code/BUPTBachelorThesis/progress.md` — chronological log
-- `/public/home/caiyiwen/code/BUPTBachelorThesis/suggestions.md` — review feedback
-- `/public/home/caiyiwen/code/BUPTBachelorThesis/todo.md` — checklist
-- `/public/home/caiyiwen/code/BUPTBachelorThesis/task_plan.md` — phased plan
+- `$HOME/code/BUPTBachelorThesis/progress.md` — chronological log
+- `$HOME/code/BUPTBachelorThesis/suggestions.md` — review feedback
+- `$HOME/code/BUPTBachelorThesis/todo.md` — checklist
+- `$HOME/code/BUPTBachelorThesis/task_plan.md` — phased plan
 
 When thesis status is unclear, read these files before asking the user.
 

@@ -9,7 +9,7 @@ CS336 Assignment 2 section 2.1.5 on `a800`: accumulation demo, dtype reasoning u
 Run on a800 to reproduce:
 
 ```bash
-cd /storage/caiyiwen/code/cs336/assignment/assignment2-systems
+cd $HOME/code/cs336/assignment/assignment2-systems
 uv run python - <<'PY'
 import torch
 print("FP32:", sum(torch.tensor(0.01, dtype=torch.float32) for _ in range(1000)).item())

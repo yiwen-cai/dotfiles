@@ -11,40 +11,40 @@
 ### 远端路径
 
 ```text
-/storage/caiyiwen/code/cs336/assignment/assignment2-systems
+$HOME/code/cs336/assignment/assignment2-systems
 ```
 
 ### 推荐状态检查命令序列
 
 1. **Git 状态与修改范围**：
 ```bash
-ssh a800 "cd /storage/caiyiwen/code/cs336/assignment/assignment2-systems && git status --short && git diff --stat"
+ssh a800 "cd \$HOME/code/cs336/assignment/assignment2-systems && git status --short && git diff --stat"
 ```
 
 2. **Attention 测试专项**：
 ```bash
-ssh a800 "export PATH='/storage/caiyiwen/.local/bin:\$PATH' && cd /storage/caiyiwen/code/cs336/assignment/assignment2-systems && uv run pytest tests/test_attention.py -v --tb=short"
+ssh a800 "export PATH=\$HOME/.local/bin:\$PATH && cd \$HOME/code/cs336/assignment/assignment2-systems && uv run pytest tests/test_attention.py -v --tb=short"
 ```
 
 3. **全量测试状态**：
 ```bash
-ssh a800 "export PATH='/storage/caiyiwen/.local/bin:\$PATH' && cd /storage/caiyiwen/code/cs336/assignment/assignment2-systems && uv run pytest tests/ -v --tb=short 2>&1 | tail -30"
+ssh a800 "export PATH=\$HOME/.local/bin:\$PATH && cd \$HOME/code/cs336/assignment/assignment2-systems && uv run pytest tests/ -v --tb=short 2>&1 | tail -30"
 ```
 
 4. **Benchmark 运行（小规模验证）**：
 ```bash
-ssh a800 "export PATH='/storage/caiyiwen/.local/bin:\$PATH' && cd /storage/caiyiwen/code/cs336/assignment/assignment2-systems && uv run python cs336_systems/benchmark.py --batch-size 2 --context-length 128 --num-layers 2 --d-model 128 --num-heads 4 --d-ff 512 --warmup-steps 5 --measure-steps 10 --mode train"
+ssh a800 "export PATH=\$HOME/.local/bin:\$PATH && cd \$HOME/code/cs336/assignment/assignment2-systems && uv run python cs336_systems/benchmark.py --batch-size 2 --context-length 128 --num-layers 2 --d-model 128 --num-heads 4 --d-ff 512 --warmup-steps 5 --measure-steps 10 --mode train"
 ```
 
 5. **Benchmark 运行（正式规模）**：
 ```bash
-ssh a800 "export PATH='/storage/caiyiwen/.local/bin:\$PATH' && cd /storage/caiyiwen/code/cs336/assignment/assignment2-systems && uv run python cs336_systems/benchmark.py --batch-size 4 --context-length 512 --num-layers 12 --d-model 768 --num-heads 12 --d-ff 3072 --warmup-steps 5 --measure-steps 10 --mode train"
+ssh a800 "export PATH=\$HOME/.local/bin:\$PATH && cd \$HOME/code/cs336/assignment/assignment2-systems && uv run python cs336_systems/benchmark.py --batch-size 4 --context-length 512 --num-layers 12 --d-model 768 --num-heads 12 --d-ff 3072 --warmup-steps 5 --measure-steps 10 --mode train"
 ```
 
 6. **Nsight Systems 数据提取**：
 ```bash
-ssh a800 "cd /storage/caiyiwen/code/cs336/assignment/assignment2-systems && cat traces/formal/summary_kernel.csv"
-ssh a800 "cd /storage/caiyiwen/code/cs336/assignment/assignment2-systems && cat traces/formal/summary_train_nvtx.csv"
+ssh a800 "cd \$HOME/code/cs336/assignment/assignment2-systems && cat traces/formal/summary_kernel.csv"
+ssh a800 "cd \$HOME/code/cs336/assignment/assignment2-systems && cat traces/formal/summary_train_nvtx.csv"
 ```
 
 ## 本次采集到的关键数据

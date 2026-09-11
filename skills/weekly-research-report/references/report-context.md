@@ -22,7 +22,7 @@ When the user mentions `wiki`, `llmwiki`, or CS336 learning records, orient with
 
 The user's graduation thesis LaTeX source and build artifacts are maintained on the lab server, not locally:
 
-- **Remote path**: `/public/home/caiyiwen/code/BUPTBachelorThesis/`
+- **Remote path**: `$HOME/code/BUPTBachelorThesis/`
 - **Key files for status checks**:
   - `progress.md` — chronological modification log with per-session summaries
   - `todo.md` — checklist of pending and completed modifications
@@ -30,7 +30,7 @@ The user's graduation thesis LaTeX source and build artifacts are maintained on 
   - `task_plan.md` — phased modification plan with completion status
   - `temp/BUPTBachelorThesis.pdf` — latest compiled PDF
 - **Build command**: `latexmk main.tex` (run from the repo root)
-- **Validation command**: `python3 <thesis-project-skill>/scripts/check_bupt_thesis.py /public/home/caiyiwen/code/BUPTBachelorThesis`（该技能同时部署于各工具的 skills 目录）
+- **Validation command**: `python3 <thesis-project-skill>/scripts/check_bupt_thesis.py $HOME/code/BUPTBachelorThesis`（该技能同时部署于各工具的 skills 目录）
 
 When thesis status is unclear, read these files before asking the user.
 

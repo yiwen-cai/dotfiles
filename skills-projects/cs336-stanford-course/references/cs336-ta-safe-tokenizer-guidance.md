@@ -6,7 +6,7 @@ Use this reference when helping a student work through Stanford CS336 Assignment
 
 1. Read the remote project guidance first when working on lab:
    ```bash
-   ssh lab 'cd /public/home/caiyiwen/code/cs336/assignment/assignment1-basics; for f in AGENTS.md AGENT.md CLAUDE.md .cursorrules; do [ -f "$f" ] && echo "===== $f =====" && sed -n "1,220p" "$f"; done; true'
+   ssh lab 'cd $HOME/code/cs336/assignment/assignment1-basics; for f in AGENTS.md AGENT.md CLAUDE.md .cursorrules; do [ -f "$f" ] && echo "===== $f =====" && sed -n "1,220p" "$f"; done; true'
    ```
 2. If guidance forbids direct solution edits, pivot to TA mode immediately:
    - Ask the student to run commands and paste output.

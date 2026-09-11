@@ -87,7 +87,7 @@ find ~/.cache/uv -maxdepth 1 -type d -name '.tmp*' -exec rm -rf {} +
 Do not run these unless the user accepts a large wheel download.
 
 ```bash
-cd /storage/caiyiwen/code/cs336/assignment/assignment2-systems
+cd $HOME/code/cs336/assignment/assignment2-systems
 uv lock --dry-run --upgrade-package torch
 uv lock --upgrade-package torch
 UV_HTTP_TIMEOUT=600 uv sync

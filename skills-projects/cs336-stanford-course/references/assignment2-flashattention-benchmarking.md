@@ -26,7 +26,7 @@ Required sweep:
 Prefer A800 selection unless the current CS336 environment has already validated the Blackwell GPU for PyTorch/Triton:
 
 ```bash
-cd /storage/caiyiwen/code/cs336/assignment/assignment2-systems
+cd $HOME/code/cs336/assignment/assignment2-systems
 export CUDA_VISIBLE_DEVICES=1
 ```
 
@@ -34,7 +34,7 @@ export CUDA_VISIBLE_DEVICES=1
 
 Use a dedicated script such as `cs336_systems/flash_benchmark.py` or extend the existing assignment `cs336_systems/attention_benchmark.py`; do not mix this into the model-level `benchmark.py`.
 
-When the user says their benchmark code is "on a800", do **not** ask them to paste it. Proactively inspect `/storage/caiyiwen/code/cs336/assignment/assignment2-systems` over SSH, search benchmark/flash-related Python files, read the likely script, and run a small smoke test. This is especially important when the user is iterating quickly and expects remote-file review.
+When the user says their benchmark code is "on a800", do **not** ask them to paste it. Proactively inspect `$HOME/code/cs336/assignment/assignment2-systems` over SSH, search benchmark/flash-related Python files, read the likely script, and run a small smoke test. This is especially important when the user is iterating quickly and expects remote-file review.
 
 Per configuration:
 

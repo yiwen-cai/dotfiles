@@ -40,13 +40,13 @@ MQA / GQA / MLA 从架构层减少 KV Cache
 远端路径：
 
 ```text
-/storage/caiyiwen/code/cs336/assignment/assignment2-systems
+$HOME/code/cs336/assignment/assignment2-systems
 ```
 
 推荐状态检查命令：
 
 ```bash
-ssh a800 "export PATH='/storage/caiyiwen/.local/bin:\$PATH' && cd /storage/caiyiwen/code/cs336/assignment/assignment2-systems && pwd && git status --short && (uv run pytest -q || true)"
+ssh a800 "export PATH=\$HOME/.local/bin:\$PATH && cd \$HOME/code/cs336/assignment/assignment2-systems && pwd && git status --short && (uv run pytest -q || true)"
 ```
 
 本次采集到的状态：
@@ -62,7 +62,7 @@ ssh a800 "export PATH='/storage/caiyiwen/.local/bin:\$PATH' && cd /storage/caiyi
 推荐最小验证命令：
 
 ```bash
-ssh a800 "export PATH='/storage/caiyiwen/.local/bin:\$PATH' && cd /storage/caiyiwen/code/cs336/assignment/assignment2-systems && uv run python cs336_systems/benchmark.py --batch-size 1 --context-length 16 --num-layers 1 --d-model 64 --num-heads 4 --d-ff 128 --warmup-steps 1 --measure-steps 2 --mode train"
+ssh a800 "export PATH=\$HOME/.local/bin:\$PATH && cd \$HOME/code/cs336/assignment/assignment2-systems && uv run python cs336_systems/benchmark.py --batch-size 1 --context-length 16 --num-layers 1 --d-model 64 --num-heads 4 --d-ff 128 --warmup-steps 1 --measure-steps 2 --mode train"
 ```
 
 本次输出：
@@ -78,7 +78,7 @@ optim mean: 0.004196567984763533s, std: 0.00024287300766445696s
 通过本地 shell 调用 `ssh a800 "... $PATH ..."` 时，远端 `$PATH` 容易被本地 shell 提前展开，导致远端 `uv` 找不到。应在命令字符串中写成 `\$PATH`，例如：
 
 ```bash
-ssh a800 "export PATH='/storage/caiyiwen/.local/bin:\$PATH' && cd /path/to/project && uv run pytest -q"
+ssh a800 "export PATH=\$HOME/.local/bin:\$PATH && cd /path/to/project && uv run pytest -q"
 ```
 
 这是可复用的远端状态采集模式；不要把一次性的 `uv: command not found` 记录成长期环境故障。

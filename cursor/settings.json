@@ -298,7 +298,7 @@
   "roo-cline.debug": false,
   "terminal.integrated.profiles.linux": {
     "zsh": {
-      "path": "/public/home/caiyiwen/.local/bin/zsh",
+      "path": "${env:HOME}/.local/bin/zsh",
     },
   },
   "terminal.integrated.defaultProfile.linux": "zsh",

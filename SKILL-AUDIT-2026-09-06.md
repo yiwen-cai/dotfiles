@@ -24,7 +24,7 @@
 
 ## 优先处理的实际问题
 
-1. 四个 GPU skill 共五个资料链接指向 /public/home/caiyiwen/code/agent-gpu-skills/...，当前 Mac 不存在；包括 Triton quick-reference。保留优先级很高，但必须修复路径或明确通过远程访问。README 却描述 ~/code/agent-gpu-skills，文档也需校正。
+1. 四个 GPU skill 共五个资料链接指向 $HOME/code/agent-gpu-skills/...，当前 Mac 不存在；包括 Triton quick-reference。保留优先级很高，但必须修复路径或明确通过远程访问。README 却描述 ~/code/agent-gpu-skills，文档也需校正。
 2. scripts/skills-targets.sh 对 Codex 主树使用全量部署，install/check 流程含 rsync --delete，仅保护 .system。zhihu 不在仓库期望树，按当前机制重新部署存在删除它的风险；先纳管或设明确排除规则。README 列出 agents 目标，实际 SKILL_TARGETS 没有该项。
 3. 不应直接删全局副本后运行 install.sh，它会重建；真正精简需要修改源目录布局及每个宿主的部署清单。归档区必须位于自动发现与部署树之外。
 4. quiz 把 3–7 题逐题答对作为提交/合并门禁，brainstorm 等还有硬前置依赖；对学习任务有选择价值，对一般交付负担过大。建议取消默认链路，保留显式学习模式。

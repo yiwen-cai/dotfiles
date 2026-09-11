@@ -7,8 +7,8 @@ CS336 Assignment 2 section 2.1.6 on `a800`: PyTorch memory profiler integration,
 ## Remote Setup
 
 ```bash
-export PATH=/storage/caiyiwen/.local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
-cd /storage/caiyiwen/code/cs336/assignment/assignment2-systems
+export PATH=$HOME/.local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+cd $HOME/code/cs336/assignment/assignment2-systems
 ```
 
 ## Adding a Memory Profile Flag

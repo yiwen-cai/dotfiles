@@ -24,14 +24,14 @@ Operate on `a800` SSH host. **Two conventions:**
 - **Agent tool execution**: still uses `ssh a800` with proper PATH.
 
 - Local notes/repo root: `/Users/yiwencai/Documents/code/cs336`
-- Remote assignment root: `/storage/caiyiwen/code/cs336/assignment`
-- Assignment 1: `/storage/caiyiwen/code/cs336/assignment/assignment1-basics`
-- Assignment 2: `/storage/caiyiwen/code/cs336/assignment/assignment2-systems`
-- Default PATH: `export PATH=/storage/caiyiwen/.local/bin:/usr/bin:/bin:/usr/sbin:/sbin:\$PATH`
+- Remote assignment root: `$HOME/code/cs336/assignment`
+- Assignment 1: `$HOME/code/cs336/assignment/assignment1-basics`
+- Assignment 2: `$HOME/code/cs336/assignment/assignment2-systems`
+- Default PATH: `export PATH=$HOME/.local/bin:/usr/bin:/bin:/usr/sbin:/sbin:\$PATH`
 - Example shown to user (no ssh prefix):
 
 ```bash
-cd /storage/caiyiwen/code/cs336/assignment/assignment2-systems
+cd $HOME/code/cs336/assignment/assignment2-systems
 uv run pytest -q
 ```
 

@@ -25,7 +25,7 @@
 - MoE 本机接口：`/Users/yiwencai/Documents/code/moe-kv-cache-experiments`
 
 包放在各项目 `docs/agent-skills/<name>/`，通过该项目 AGENTS.md 的条件路由读取。既有项目规则保留，博客旧发布流程路径已修正。
-论文模板实际位于 H100 的 `/public/home/caiyiwen/code/BUPTBachelorThesis`；已只读核实 main.tex 和 BUPTBachelorThesis.sty。本次没有扩展到远程部署，论文包在 `skills-projects/bupt-thesis-writer` 保留，项目绑定状态为 pending。
+论文模板实际位于 H100 的 `$HOME/code/BUPTBachelorThesis`；已只读核实 main.tex 和 BUPTBachelorThesis.sty。本次没有扩展到远程部署，论文包在 `skills-projects/bupt-thesis-writer` 保留，项目绑定状态为 pending。
 
 ## 内容整理
 

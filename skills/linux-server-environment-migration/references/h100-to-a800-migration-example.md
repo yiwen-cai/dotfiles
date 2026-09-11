@@ -4,8 +4,8 @@
 
 | Role | SSH Alias | Address | User | Home Directory |
 |------|-----------|-------------|------|----------------|
-| Source (H100) | `lab` | see `~/.ssh/config` | caiyiwen | `/public/home/caiyiwen` |
-| Target (A800) | `a800` | see `~/.ssh/config` | caiyiwen | `/storage/caiyiwen` |
+| Source (H100) | `lab` | see `~/.ssh/config` | see `~/.ssh/config` | `$HOME` |
+| Target (A800) | `a800` | see `~/.ssh/config` | see `~/.ssh/config` | `$HOME` |
 
 Both use the same SSH key (`~/.ssh/id_ed25519`).
 
@@ -17,14 +17,14 @@ Both use the same SSH key (`~/.ssh/id_ed25519`).
   - aliases: `ls=lsd`, `reload="source ~/.zshrc"`
   - env: CUDA_HOME, UV_INDEX_URL, TAVILY_API_KEY, EXA_API_KEY
   - script: `eval "$(fzf --zsh)"`
-- Miniconda: `/public/home/caiyiwen/apps/miniconda3`
+- Miniconda: `$HOME/apps/miniconda3`
 - Local tools: lsd (~/.local/bin), fzf (~/.fzf), nvim, helix, wezterm
 - CUDA: nvcc at `/usr/bin/nvcc`, `/usr/local/cuda` symlink
 - Additional apps in `~/apps/`: chafa, helix, miniconda3, nvim, wezterm
 
 ## Target After Migration
 
-- Home: `/storage/caiyiwen`
+- Home: `$HOME`
 - Same zsh/oh-my-zsh/powerlevel10k setup
 - Miniconda 26.3.2 at `~/apps/miniconda3`
 - lsd 1.1.5 at `~/.local/bin/lsd`
