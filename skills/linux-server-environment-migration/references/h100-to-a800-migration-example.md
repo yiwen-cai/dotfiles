@@ -2,10 +2,10 @@
 
 ## Server Layout
 
-| Role | SSH Alias | Hostname/IP | User | Home Directory |
+| Role | SSH Alias | Address | User | Home Directory |
 |------|-----------|-------------|------|----------------|
-| Source (H100) | `lab` | 10.160.4.102 | caiyiwen | `/public/home/caiyiwen` |
-| Target (A800) | `a800` | 10.160.4.104 | caiyiwen | `/storage/caiyiwen` |
+| Source (H100) | `lab` | see `~/.ssh/config` | caiyiwen | `/public/home/caiyiwen` |
+| Target (A800) | `a800` | see `~/.ssh/config` | caiyiwen | `/storage/caiyiwen` |
 
 Both use the same SSH key (`~/.ssh/id_ed25519`).
 

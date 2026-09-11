@@ -58,7 +58,7 @@ Avoid:
 
 Later the user clarified that **all CS336 code runs on the remote lab server**, not on the local machine. Future CS336 planning or coding guidance should assume:
 
-- Code execution host: `lab` (`10.160.4.102`)
+- Code execution host: `lab` (address in `~/.ssh/config`)
 - Remote user: `caiyiwen`
 - Project root: `/public/home/caiyiwen/code/cs336`
 - GPU experiments: 8× H100 on lab
