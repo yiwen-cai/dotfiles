@@ -1,0 +1,62 @@
+[
+  {
+    "name": "imagegen",
+    "diff_lines": 143,
+    "original": "skills-archive/imagegen",
+    "provider": "/Users/yiwencai/.codex/skills/.system/imagegen/SKILL.md"
+  },
+  {
+    "name": "openai-docs",
+    "diff_lines": 192,
+    "original": "skills-archive/openai-docs",
+    "provider": "/Users/yiwencai/.codex/skills/.system/openai-docs/SKILL.md"
+  },
+  {
+    "name": "plugin-creator",
+    "diff_lines": 31,
+    "original": "skills-archive/plugin-creator",
+    "provider": "/Users/yiwencai/.codex/skills/.system/plugin-creator/SKILL.md"
+  },
+  {
+    "name": "skill-creator",
+    "diff_lines": 621,
+    "original": "skills-archive/skill-creator",
+    "provider": "/Users/yiwencai/.codex/skills/.system/skill-creator/SKILL.md"
+  },
+  {
+    "name": "skill-installer",
+    "diff_lines": 11,
+    "original": "skills-archive/skill-installer",
+    "provider": "/Users/yiwencai/.codex/skills/.system/skill-installer/SKILL.md"
+  },
+  {
+    "name": "documents",
+    "diff_lines": 456,
+    "original": "skills-archive/documents",
+    "provider": "/Users/yiwencai/.codex/plugins/cache/openai-primary-runtime/documents/26.904.11930/skills/documents/SKILL.md"
+  },
+  {
+    "name": "pdf",
+    "diff_lines": 95,
+    "original": "skills-archive/pdf",
+    "provider": "/Users/yiwencai/.codex/plugins/cache/openai-primary-runtime/pdf/26.904.11930/skills/pdf/SKILL.md"
+  },
+  {
+    "name": "presentations",
+    "diff_lines": 503,
+    "original": "skills-archive/presentations",
+    "provider": "/Users/yiwencai/.codex/plugins/cache/openai-primary-runtime/presentations/26.904.11930/skills/presentations/SKILL.md"
+  },
+  {
+    "name": "spreadsheets",
+    "diff_lines": 325,
+    "original": "skills-archive/spreadsheets",
+    "provider": "/Users/yiwencai/.codex/plugins/cache/openai-primary-runtime/spreadsheets/26.904.11930/skills/spreadsheets/SKILL.md"
+  },
+  {
+    "name": "template-creator",
+    "diff_lines": 258,
+    "original": "skills-archive/template-creator",
+    "provider": "/Users/yiwencai/.codex/plugins/cache/openai-primary-runtime/template-creator/26.904.11930/skills/template-creator/SKILL.md"
+  }
+]

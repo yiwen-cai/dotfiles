@@ -6,8 +6,12 @@
 
 ```
 .
-├── skills/                      # 技能单一事实源（全量，部署到所有工具）
-├── skills-local/                # 本机专属技能（按工具白名单部署）
+├── skills/                      # 13 个核心入口（按清单部署）
+├── skills-local/                # 4 个 GPU 资料入口
+├── skills-projects/             # 项目专属流程
+├── skills-optional/             # 默认停用的可选包
+├── skills-archive/              # 迁移前原件（本机快照，.gitignore 排除）
+├── skills-manifest.json         # 生命周期与目标清单
 ├── scripts/
 │   ├── check-skills.sh          # skills 结构与部署一致性校验
 │   └── skills-targets.sh        # 部署目标定义（install.sh 共用）
@@ -50,27 +54,61 @@
 └── .gitignore
 ```
 
-## 技能组织（单一事实源）
+## 技能组织（显式清单）
 
-所有技能只维护一份，放在 `skills/`；`claude/skills` 与 `codex/skills` 只是兼容软链接。
-`install.sh` 把 `skills/`（全量）+ `skills-local/`（按白名单）rsync 部署到：
+`skills-manifest.json` 是唯一的生命周期与部署清单：
 
-| 目标 | 目录 | 部署主树 | 本地技能白名单 |
-|------|------|----------|----------------|
-| Claude | `~/.claude/skills` | 是 | bupt-thesis-writer, cuda-skill, cutlass-skill, sglang-skill, triton-skill |
-| Codex | `~/.codex/skills` | 是 | bupt-thesis-writer |
-| zcode | `~/.zcode/skills` | 是 | — |
-| agents | `~/.agents/skills` | 否（仅本地） | cuda-skill, cutlass-skill, sglang-skill, triton-skill |
+| 来源 | 用途 | 默认部署 |
+|---|---|---|
+| `skills/` | 13 个科研/学习/环境/平台入口 | `~/.codex/skills`、`~/.claude/skills`（同一 profile 镜像） |
+| `skills-local/` | 4 个 GPU 资料入口 | `~/.agents/skills` |
+| `skills-projects/` | 5 个项目专属包 | 已绑定项目的 `docs/agent-skills/`，由 AGENTS.md 按需路由 |
+| `skills-optional/` | 68 个按需包，入口为 `SKILL.md.disabled` | 默认不部署 |
+| `skills-archive/` | 全部 160 个迁移前原件，入口停用；**本机快照，不入库**（见 `.gitignore`） | 不部署 |
 
-- 部署用 `rsync -aO --delete` 全权收敛，目标目录以仓库为准；`--exclude='.system'` 保护 Codex 内置技能目录。
-- 白名单内的本地技能以**符号链接**形式部署（指向 `skills-local/`），不复制内容；改动仓库后重新运行 install.sh 即生效。
-- 本地 GPU 技能（cuda/cutlass/sglang/triton-skill）内部的 `references`/`repos` 符号链接指向 `~/code/agent-gpu-skills`（github.com/slowlyC/agent-gpu-skills），新机器需先 clone 该仓库。
-- 技能间交叉引用一律按技能名（如「先执行 blindspot-pass」），禁止写 `~/.claude/skills/<x>/SKILL.md` 这类路径——那是当初 claude/codex 双树分叉的根源。
-- 改完技能后先运行 `scripts/check-skills.sh --deployed` 校验，再运行 `./install.sh` 部署。
+71 个原始名称已退役，个人资料/脚本按清单合并或保存在原件中；退役条目亦可从 git 历史取回。系统 `.system` 与插件缓存由宿主管理。
+Claude Code 的 target 已启用，与 codex 共用 `codex-core` profile，两处内容逐字节一致；zcode 仍为 disabled。
+安装脚本只同步清单登记的名称，不会再向宿主同步整棵技能树。
+`claude/skills` 与 `codex/skills` 仍是仓库内的兼容链接，不代表这些宿主的实际部署集合。
 
-交付流程链路（同一套技能，各工具通用）：
+target 的 `discovery_group` 表示"由同一个 agent 扫描的目录集合"：同组内一个技能名只能出现在一处
+（`codex` 与 `agents` 同组，互斥），跨组可以镜像同名技能（`claude` 自成一组，镜像 codex 的 13 个入口）。
 
-`blindspot-pass → brainstorm → interview → reference → planning → implement → explaination → quiz`
+部署器只操作**已登记的名称**，不再对共享目录执行 `rsync --delete`。未知 skill 和 `.system` 原样保留；同名未知目录、用户后续编辑或过期计划会报冲突。
+
+```bash
+# 只检查源包
+bash scripts/check-skills.sh
+
+# 生成完整预演（不改全局目录）
+python3 scripts/manage-skills.py plan --targets codex,agents,claude,projects --out /tmp/skills-plan.json
+
+# 应用已核对且仍有效的预演
+python3 scripts/manage-skills.py apply --plan /tmp/skills-plan.json
+
+# 检查实际部署；再部署应无变化
+bash scripts/check-skills.sh --deployed
+
+# 回滚某次部署（路径由 apply 返回；后续编辑会受到保护）
+python3 scripts/manage-skills.py rollback --snapshot /absolute/path/to/snapshot
+```
+
+首次迁移已有目录需要显式的路径→内容哈希 `--adopt` 清单；不要为绕过冲突直接强行覆盖。
+部署状态、项目绑定和每次快照保存在 `~/.local/state/dotfiles/skills/`。
+项目绑定文件为该目录下的 `projects.json`（skill 名→已核实项目绝对路径）；未绑定的论文包保持 pending。
+
+启用可选包：在相应 target 的 `optional` 数组中加入一个清单中的可选名称，生成 plan 后 apply。
+部署器只将该包的 `SKILL.md.disabled` 在目标中恢复为 `SKILL.md`，不会启用整个目录。
+停用时从数组移除，再 plan/apply；已修改的部署包会报冲突并保留。
+
+### GPU 资料
+
+四个入口各带 `scripts/resolve-gpu-source.py`。本地资料库可用时设置 `GPU_SKILLS_ROOT`；否则经 SSH 读取 H100 上的资料。
+远程位置可用 `GPU_SKILLS_HOST` 与 `GPU_SKILLS_REMOTE_ROOT` 覆盖，不把远程路径做成本机符号链接。
+解析器读取一份实际文档/源码并返回哈希；沙箱不允许 SSH 时，应使用宿主提供的授权机制，不能误判为资料不存在。
+不自动下载大型源码仓库，也不启动 GPU 实验。
+
+迁移依据见 [审查](SKILL-AUDIT-2026-09-06.md)、[方案](.hermes/plans/2026-09-06-skill-consolidation.md) 和 [执行记录](docs/skill-migration/RESULTS.md)。
 
 ## 在新机器上安装
 
@@ -146,7 +184,7 @@ API key。请在该本机文件中填写需要导出的环境变量，例如 `OP
 ## 更新配置
 
 大部分配置（`~/.claude/CLAUDE.md` 等）用软链接安装，直接编辑本仓库文件即生效；
-skills 目录不是软链接，修改 `skills/` 或 `skills-local/` 后需重新运行 `./install.sh` 部署。更新后：
+修改 skill 源后，先生成部署预演，再使用 `scripts/manage-skills.py apply` 部署。更新后：
 
 ```bash
 cd ~/Documents/code/dotfiles

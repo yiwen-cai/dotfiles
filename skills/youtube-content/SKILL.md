@@ -1,79 +1,18 @@
 ---
 name: youtube-content
-description: YouTube transcripts to summaries, threads, blogs.
-user-invocable: true
+description: "提取 YouTube 视频字幕及时间戳，整理课程摘要或指定格式的笔记。"
 metadata:
   migrated_from: hermes-agent
   source_skills_count: 0
 ---
 
-# YouTube Content Tool
+# youtube-content
 
-## When to use
+## 字幕提取
+脚本为 `scripts/fetch_transcript.py`。先用 `--help` 确认参数；使用有 youtube-transcript-api 的环境，或 `uv run --with youtube-transcript-api python <script> <URL>`，避免修改无关项目环境。
+支持 URL 或 video ID，`--text-only`、`--timestamps`、`--language zh,en` 按任务选择。核实内容非空与实际语言。
+字幕关闭、视频私有或限流时报告具体失败；不要声称已经看过视频画面。缺少指定语言可以尝试现有字幕并说明语言。
 
-Use when the user shares a YouTube URL or video link, asks to summarize a video, requests a transcript, or wants to extract and reformat content from any YouTube video. Transforms transcripts into structured content (chapters, summaries, threads, blog posts).
-
-Extract transcripts from YouTube videos and convert them into useful formats.
-
-## Setup
-
-Use `uv` so the dependency is installed into the same Hermes-managed environment
-that runs the helper script:
-
-```bash
-uv pip install youtube-transcript-api
-```
-
-## Helper Script
-
-`SKILL_DIR` is the directory containing this SKILL.md file. The script accepts any standard YouTube URL format, short links (youtu.be), shorts, embeds, live links, or a raw 11-character video ID.
-
-```bash
-# JSON output with metadata
-uv run python3 SKILL_DIR/scripts/fetch_transcript.py "https://youtube.com/watch?v=VIDEO_ID"
-
-# Plain text (good for piping into further processing)
-uv run python3 SKILL_DIR/scripts/fetch_transcript.py "URL" --text-only
-
-# With timestamps
-uv run python3 SKILL_DIR/scripts/fetch_transcript.py "URL" --timestamps
-
-# Specific language with fallback chain
-uv run python3 SKILL_DIR/scripts/fetch_transcript.py "URL" --language tr,en
-```
-
-## Output Formats
-
-After fetching the transcript, format it based on what the user asks for:
-
-- **Chapters**: Group by topic shifts, output timestamped chapter list
-- **Summary**: Concise 5-10 sentence overview of the entire video
-- **Chapter summaries**: Chapters with a short paragraph summary for each
-- **Thread**: Twitter/X thread format — numbered posts, each under 280 chars
-- **Blog post**: Full article with title, sections, and key takeaways
-- **Quotes**: Notable quotes with timestamps
-
-### Example — Chapters Output
-
-```
-00:00 Introduction — host opens with the problem statement
-03:45 Background — prior work and why existing solutions fall short
-12:20 Core method — walkthrough of the proposed approach
-24:10 Results — benchmark comparisons and key takeaways
-31:55 Q&A — audience questions on scalability and next steps
-```
-
-## Workflow
-
-1. **Fetch** the transcript using the helper script with `--text-only --timestamps` via `uv run python3`.
-2. **Validate**: confirm the output is non-empty and in the expected language. If empty, retry without `--language` to get any available transcript. If still empty, tell the user the video likely has transcripts disabled.
-3. **Chunk if needed**: if the transcript exceeds ~50K characters, split into overlapping chunks (~40K with 2K overlap) and summarize each chunk before merging.
-4. **Transform** into the requested output format. If the user did not specify a format, default to a summary.
-5. **Verify**: re-read the transformed output to check for coherence, correct timestamps, and completeness before presenting.
-
-## Error Handling
-
-- **Transcript disabled**: tell the user; suggest they check if subtitles are available on the video page.
-- **Private/unavailable video**: relay the error and ask the user to verify the URL.
-- **No matching language**: retry without `--language` to fetch any available transcript, then note the actual language to the user.
-- **Dependency missing**: run `uv pip install youtube-transcript-api` and retry.
+## 整理
+按主题和时间戳组织课程内容，区分视频原文与解释补充。可选格式见 [output-formats.md](references/output-formats.md)。只整理内容，不自动向社交平台发送。
+核对时间戳与原文对应，长字幕分段后检查跨段遗漏和重复。

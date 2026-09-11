@@ -1,171 +1,21 @@
 ---
 name: github-operations
-description: 'GitHub operations umbrella: authentication, repository management, issues, PR lifecycle, code review, CI, releases,
-  and API fallbacks via gh/git/curl.'
-user-invocable: true
+description: "处理 GitHub issue、PR 评论和 Actions CI，使用实际可用的连接器或 gh 并保留线程级上下文。"
 metadata:
   migrated_from: hermes-agent
   source_skills_count: 0
 ---
 
-# GitHub Operations
+# github-operations
 
-Use this class-level umbrella for GitHub work: authentication, repository lifecycle, issues, pull requests, code review, CI checks, branch protection, secrets, releases, and API fallback workflows. Load this instead of separate narrow GitHub skills.
+## 路由与授权
+先从当前 git remote/branch 或用户链接确定仓库与 PR。有连接器且覆盖任务时使用连接器；线程状态、CI 日志或缺少覆盖时用 `gh`，不假定宿主装有特定插件。
+普通本地 git 不需要此工作流。用户已要求修复的范围直接完成；不因旧模板重复要求“批准修复”。发评论、提交、推送和创建 PR 按用户实际授权执行。
 
-## Core operating pattern
+## 具体工具
+- 评论线程：`python scripts/fetch_comments.py`；先读帮助/实现确认上下文，保留 resolved 状态和行级评论，不把扁平 comments 当完整 review。
+- Actions：`python scripts/inspect_pr_checks.py --repo <repo> --pr <PR>`；需要时读失败 job 日志，非 Actions 的 CI 链接单独报告。
+- 提交/PR：检查当前 diff 和已有修改，仅暂存本任务文件。正文写问题、最终行为、验证及限制；多行正文用结构化字段或 `--body-file`。
 
-1. Detect auth/tooling once.
-2. Extract `owner/repo` from the remote if inside a repo.
-3. Prefer `gh` when authenticated; otherwise use `git` plus GitHub REST/GraphQL with `GITHUB_TOKEN`.
-4. Use file tools for code edits and `git` for repository state/history.
-5. Verify side effects by reading back GitHub state (`gh pr view`, API response, checks, issue state, release listing).
-
-```bash
-git --version
-gh --version 2>/dev/null || echo "gh not installed"
-gh auth status 2>/dev/null || echo "gh not authenticated"
-
-if command -v gh >/dev/null 2>&1 && gh auth status >/dev/null 2>&1; then
-  AUTH=gh
-else
-  AUTH=curl
-  if [ -z "$GITHUB_TOKEN" ]; then
-    if [ -f ~/.hermes/.env ] && grep -q '^GITHUB_TOKEN=' ~/.hermes/.env; then
-      export GITHUB_TOKEN=$(grep '^GITHUB_TOKEN=' ~/.hermes/.env | head -1 | cut -d= -f2- | tr -d '\r\n')
-    elif grep -q 'github.com' ~/.git-credentials 2>/dev/null; then
-      export GITHUB_TOKEN=$(grep 'github.com' ~/.git-credentials | head -1 | sed 's|https://[^:]*:\([^@]*\)@.*|\1|')
-    fi
-  fi
-fi
-
-if git remote get-url origin >/dev/null 2>&1; then
-  REMOTE_URL=$(git remote get-url origin)
-  OWNER_REPO=$(echo "$REMOTE_URL" | sed -E 's|.*github\.com[:/]||; s|\.git$||')
-  OWNER=$(echo "$OWNER_REPO" | cut -d/ -f1)
-  REPO=$(echo "$OWNER_REPO" | cut -d/ -f2)
-fi
-```
-
-## Authentication
-
-Use `gh auth status` first. If unavailable, use PAT/SSH.
-
-- PAT scopes commonly needed: `repo`, `workflow`, `read:org` for org repos.
-- `gh auth login` is simplest on desktops; `echo "$TOKEN" | gh auth login --with-token && gh auth setup-git` is best headless.
-- Git-only fallback: `git config --global credential.helper store`, then use the PAT as the HTTPS password.
-- SSH fallback: generate ed25519 key, add public key to GitHub, test `ssh -T git@github.com`.
-
-Troubleshooting: password auth is disabled; stale cached credentials need `git credential reject`; Copilot tokens are not GitHub API tokens.
-
-## Repository management
-
-Common tasks:
-
-```bash
-# clone
-gh repo clone owner/repo || git clone https://github.com/owner/repo.git
-
-# create repo with gh
-gh repo create my-project --private --source . --push
-
-# create repo with REST
-curl -s -X POST -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/user/repos \
-  -d '{"name":"my-project","private":true}'
-
-# fork and sync
-gh repo fork owner/repo --clone
-git fetch upstream && git checkout main && git merge upstream/main && git push origin main
-
-# inspect/edit
-gh repo view owner/repo
-gh repo edit --enable-issues=true --enable-auto-merge
-```
-
-Branch protection, Actions secrets, releases, workflow runs, and gists are all repository-management work. Prefer `gh secret set` for secrets because REST requires public-key encryption.
-
-## Issues and triage
-
-Use for creating, searching, labeling, assigning, closing, and commenting on issues.
-
-```bash
-gh issue list --state open --label bug
-gh issue view 42
-gh issue create --title "Login redirect ignores ?next=" --body-file issue.md --label bug
-
-gh issue edit 42 --add-label "priority:high" --add-assignee @me
-gh issue comment 42 --body "Investigated; root cause is auth middleware."
-gh issue close 42 --reason completed
-```
-
-REST fallback endpoints: `GET/POST /repos/{owner}/{repo}/issues`, `POST /issues/{n}/labels`, `POST /issues/{n}/assignees`, `POST /issues/{n}/comments`, `PATCH /issues/{n}`.
-
-Triage loop: list untriaged → read details → categorize → label/priority → assign → comment with decision.
-
-## PR lifecycle
-
-```bash
-git fetch origin
-git checkout main && git pull origin main
-git checkout -b feat/short-description
-# edit files
-git add <files>
-git commit -m "feat: concise summary"
-git push -u origin HEAD
-
-gh pr create --title "feat: concise summary" --body-file pr.md
-gh pr checks --watch
-gh pr merge --squash --delete-branch
-```
-
-REST fallback: `POST /pulls` to create, `GET /commits/{sha}/status` and `GET /commits/{sha}/check-runs` for checks, `PUT /pulls/{n}/merge` to merge, GraphQL for auto-merge.
-
-CI auto-fix loop: check status → read failed logs (`gh run view --log-failed` or logs ZIP) → understand → patch/write files → commit/push → wait and re-check. Stop after bounded attempts if still failing.
-
-## Code review
-
-Use for local pre-push review or reviewing a PR.
-
-Local pre-push:
-
-```bash
-git diff main...HEAD --stat
-git diff main...HEAD --name-only
-git diff main...HEAD
-```
-
-Review checklist: correctness, security, code quality, testing, performance, documentation. Read full changed files when diff context is insufficient.
-
-PR review flow:
-
-```bash
-gh pr view 123
-gh pr diff 123 --name-only
-gh pr checks 123
-gh pr checkout 123
-# run tests/lints where practical
-gh pr review 123 --comment --body "..."
-# or --approve / --request-changes
-```
-
-Structured output:
-
-```markdown
-## Code Review Summary
-### Critical
-### Warnings
-### Suggestions
-### Looks Good
-```
-
-Inline REST reviews use `POST /repos/{owner}/{repo}/pulls/{n}/reviews` with `commit_id`, `event`, `body`, and `comments`.
-
-## Templates and references
-
-This umbrella carries migrated support files from the former narrow GitHub skills:
-
-- `scripts/gh-env.sh` — auth/repo environment bootstrap.
-- `references/review-output-template.md` — formal review summary template.
-- `references/ci-troubleshooting.md` — CI failure diagnosis patterns.
-- `references/conventional-commits.md` — commit message guidance.
-- `references/github-api-cheatsheet.md` — REST endpoint crib sheet.
-- `templates/bug-report.md`, `templates/feature-request.md`, `templates/pr-body-bugfix.md`, `templates/pr-body-feature.md` — starter issue/PR bodies.
+## 验证
+检查实际 PR/评论/CI 状态，区分读取、修改、发布结果。缺认证时报告具体需要的登录步骤，不输出 token。

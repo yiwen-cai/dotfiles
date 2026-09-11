@@ -50,3 +50,13 @@ stats-cache.json
 # 不进 git；部署时 rsync 排除，本机已有 checkout 保留
 # ============================================================
 skills-local/*/repos/
+
+# Skill tooling runtime state (existing tracked artifacts are not rewritten)
+__pycache__/
+*.pyc
+
+# ============================================================
+# 迁移前原件快照（skills-archive/）：本机保留，不入公开仓库
+# 退役条目均可从 git 历史恢复；另含宿主内置技能的素材与内网信息
+# ============================================================
+skills-archive/

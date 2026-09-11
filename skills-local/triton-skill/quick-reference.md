@@ -1,1 +1,0 @@
-/public/home/caiyiwen/code/agent-gpu-skills/triton_skill/quick-reference.md

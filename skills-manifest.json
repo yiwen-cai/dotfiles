@@ -1,0 +1,917 @@
+{
+  "version": 1,
+  "entries": {
+    "academic-research-output": {
+      "status": "global",
+      "source": "skills/academic-research-output",
+      "original": "skills-archive/academic-research-output"
+    },
+    "academic-study-planner": {
+      "status": "retired",
+      "source": "skills-archive/academic-study-planner",
+      "original": "skills-archive/academic-study-planner"
+    },
+    "airtable": {
+      "status": "optional",
+      "source": "skills-optional/airtable",
+      "original": "skills-archive/airtable"
+    },
+    "apikey-image-gen": {
+      "status": "optional",
+      "source": "skills-optional/apikey-image-gen",
+      "original": "skills-archive/apikey-image-gen"
+    },
+    "apple-ecosystem-automation": {
+      "status": "optional",
+      "source": "skills-optional/apple-ecosystem-automation",
+      "original": "skills-archive/apple-ecosystem-automation"
+    },
+    "architecture-diagram": {
+      "status": "retired",
+      "source": "skills-archive/architecture-diagram",
+      "original": "skills-archive/architecture-diagram",
+      "merged_into": "academic-research-output"
+    },
+    "ascii-art": {
+      "status": "optional",
+      "source": "skills-optional/ascii-art",
+      "original": "skills-archive/ascii-art"
+    },
+    "ascii-video": {
+      "status": "optional",
+      "source": "skills-optional/ascii-video",
+      "original": "skills-archive/ascii-video"
+    },
+    "audiocraft": {
+      "status": "optional",
+      "source": "skills-optional/audiocraft",
+      "original": "skills-archive/audiocraft"
+    },
+    "automated-daily-briefings": {
+      "status": "retired",
+      "source": "skills-archive/automated-daily-briefings",
+      "original": "skills-archive/automated-daily-briefings",
+      "merged_into": "research-content-monitoring"
+    },
+    "baoyu-visual-content": {
+      "status": "optional",
+      "source": "skills-optional/baoyu-visual-content",
+      "original": "skills-archive/baoyu-visual-content"
+    },
+    "bilingual-resume-typst": {
+      "status": "project",
+      "source": "skills-projects/bilingual-resume-typst",
+      "original": "skills-archive/bilingual-resume-typst"
+    },
+    "blindspot-pass": {
+      "status": "retired",
+      "source": "skills-archive/blindspot-pass",
+      "original": "skills-archive/blindspot-pass",
+      "merged_into": "codex/AGENTS.md"
+    },
+    "brainstorm": {
+      "status": "retired",
+      "source": "skills-archive/brainstorm",
+      "original": "skills-archive/brainstorm",
+      "merged_into": "codex/AGENTS.md"
+    },
+    "bupt-thesis-writer": {
+      "status": "project",
+      "source": "skills-projects/bupt-thesis-writer",
+      "original": "skills-archive/bupt-thesis-writer"
+    },
+    "claude-design": {
+      "status": "retired",
+      "source": "skills-archive/claude-design",
+      "original": "skills-archive/claude-design"
+    },
+    "codebase-inspection": {
+      "status": "retired",
+      "source": "skills-archive/codebase-inspection",
+      "original": "skills-archive/codebase-inspection"
+    },
+    "comfyui": {
+      "status": "optional",
+      "source": "skills-optional/comfyui",
+      "original": "skills-archive/comfyui"
+    },
+    "computer-use": {
+      "status": "retired",
+      "source": "skills-archive/computer-use",
+      "original": "skills-archive/computer-use"
+    },
+    "control-chrome": {
+      "status": "retired",
+      "source": "skills-archive/control-chrome",
+      "original": "skills-archive/control-chrome"
+    },
+    "control-in-app-browser": {
+      "status": "retired",
+      "source": "skills-archive/control-in-app-browser",
+      "original": "skills-archive/control-in-app-browser"
+    },
+    "course-learning-planner": {
+      "status": "global",
+      "source": "skills/course-learning-planner",
+      "original": "skills-archive/course-learning-planner"
+    },
+    "create-local-project-interface": {
+      "status": "global",
+      "source": "skills/create-local-project-interface",
+      "original": "skills-archive/create-local-project-interface"
+    },
+    "creative-ideation": {
+      "status": "retired",
+      "source": "skills-archive/creative-ideation",
+      "original": "skills-archive/creative-ideation"
+    },
+    "cs336-stanford-course": {
+      "status": "project",
+      "source": "skills-projects/cs336-stanford-course",
+      "original": "skills-archive/cs336-stanford-course"
+    },
+    "cuda-skill": {
+      "status": "global",
+      "source": "skills-local/cuda-skill",
+      "original": "skills-archive/cuda-skill"
+    },
+    "cutlass-skill": {
+      "status": "global",
+      "source": "skills-local/cutlass-skill",
+      "original": "skills-archive/cutlass-skill"
+    },
+    "data-consolidation-agent": {
+      "status": "retired",
+      "source": "skills-archive/data-consolidation-agent",
+      "original": "skills-archive/data-consolidation-agent"
+    },
+    "debugging-hermes-tui-commands": {
+      "status": "optional",
+      "source": "skills-optional/debugging-hermes-tui-commands",
+      "original": "skills-archive/debugging-hermes-tui-commands"
+    },
+    "debugging-with-inspect": {
+      "status": "optional",
+      "source": "skills-optional/debugging-with-inspect",
+      "original": "skills-archive/debugging-with-inspect"
+    },
+    "design-md": {
+      "status": "optional",
+      "source": "skills-optional/design-md",
+      "original": "skills-archive/design-md"
+    },
+    "documents": {
+      "status": "retired",
+      "source": "skills-archive/documents",
+      "original": "skills-archive/documents"
+    },
+    "dspy": {
+      "status": "optional",
+      "source": "skills-optional/dspy",
+      "original": "skills-archive/dspy"
+    },
+    "engineering-ai-data-remediation-engineer": {
+      "status": "retired",
+      "source": "skills-archive/engineering-ai-data-remediation-engineer",
+      "original": "skills-archive/engineering-ai-data-remediation-engineer"
+    },
+    "engineering-ai-engineer": {
+      "status": "retired",
+      "source": "skills-archive/engineering-ai-engineer",
+      "original": "skills-archive/engineering-ai-engineer"
+    },
+    "engineering-autonomous-optimization-architect": {
+      "status": "retired",
+      "source": "skills-archive/engineering-autonomous-optimization-architect",
+      "original": "skills-archive/engineering-autonomous-optimization-architect"
+    },
+    "engineering-backend-architect": {
+      "status": "retired",
+      "source": "skills-archive/engineering-backend-architect",
+      "original": "skills-archive/engineering-backend-architect"
+    },
+    "engineering-code-reviewer": {
+      "status": "retired",
+      "source": "skills-archive/engineering-code-reviewer",
+      "original": "skills-archive/engineering-code-reviewer"
+    },
+    "engineering-codebase-onboarding-engineer": {
+      "status": "retired",
+      "source": "skills-archive/engineering-codebase-onboarding-engineer",
+      "original": "skills-archive/engineering-codebase-onboarding-engineer"
+    },
+    "engineering-data-engineer": {
+      "status": "retired",
+      "source": "skills-archive/engineering-data-engineer",
+      "original": "skills-archive/engineering-data-engineer"
+    },
+    "engineering-database-optimizer": {
+      "status": "retired",
+      "source": "skills-archive/engineering-database-optimizer",
+      "original": "skills-archive/engineering-database-optimizer"
+    },
+    "engineering-devops-automator": {
+      "status": "retired",
+      "source": "skills-archive/engineering-devops-automator",
+      "original": "skills-archive/engineering-devops-automator"
+    },
+    "engineering-git-workflow-master": {
+      "status": "retired",
+      "source": "skills-archive/engineering-git-workflow-master",
+      "original": "skills-archive/engineering-git-workflow-master"
+    },
+    "engineering-incident-response-commander": {
+      "status": "retired",
+      "source": "skills-archive/engineering-incident-response-commander",
+      "original": "skills-archive/engineering-incident-response-commander"
+    },
+    "engineering-minimal-change-engineer": {
+      "status": "retired",
+      "source": "skills-archive/engineering-minimal-change-engineer",
+      "original": "skills-archive/engineering-minimal-change-engineer"
+    },
+    "engineering-security-engineer": {
+      "status": "retired",
+      "source": "skills-archive/engineering-security-engineer",
+      "original": "skills-archive/engineering-security-engineer"
+    },
+    "engineering-senior-developer": {
+      "status": "retired",
+      "source": "skills-archive/engineering-senior-developer",
+      "original": "skills-archive/engineering-senior-developer"
+    },
+    "engineering-software-architect": {
+      "status": "retired",
+      "source": "skills-archive/engineering-software-architect",
+      "original": "skills-archive/engineering-software-architect"
+    },
+    "engineering-sre": {
+      "status": "retired",
+      "source": "skills-archive/engineering-sre",
+      "original": "skills-archive/engineering-sre"
+    },
+    "engineering-technical-writer": {
+      "status": "retired",
+      "source": "skills-archive/engineering-technical-writer",
+      "original": "skills-archive/engineering-technical-writer"
+    },
+    "excalidraw": {
+      "status": "optional",
+      "source": "skills-optional/excalidraw",
+      "original": "skills-archive/excalidraw"
+    },
+    "explaination": {
+      "status": "retired",
+      "source": "skills-archive/explaination",
+      "original": "skills-archive/explaination",
+      "merged_into": "codex/AGENTS.md"
+    },
+    "external-coding-agents": {
+      "status": "optional",
+      "source": "skills-optional/external-coding-agents",
+      "original": "skills-archive/external-coding-agents"
+    },
+    "feishu": {
+      "status": "optional",
+      "source": "skills-optional/feishu",
+      "original": "skills-archive/feishu"
+    },
+    "find-skills": {
+      "status": "retired",
+      "source": "skills-archive/find-skills",
+      "original": "skills-archive/find-skills"
+    },
+    "gh-address-comments": {
+      "status": "retired",
+      "source": "skills-archive/gh-address-comments",
+      "original": "skills-archive/gh-address-comments",
+      "merged_into": "github-operations"
+    },
+    "gh-fix-ci": {
+      "status": "retired",
+      "source": "skills-archive/gh-fix-ci",
+      "original": "skills-archive/gh-fix-ci",
+      "merged_into": "github-operations"
+    },
+    "gif-search": {
+      "status": "optional",
+      "source": "skills-optional/gif-search",
+      "original": "skills-archive/gif-search"
+    },
+    "github": {
+      "status": "retired",
+      "source": "skills-archive/github",
+      "original": "skills-archive/github",
+      "merged_into": "github-operations"
+    },
+    "github-operations": {
+      "status": "global",
+      "source": "skills/github-operations",
+      "original": "skills-archive/github-operations"
+    },
+    "godmode": {
+      "status": "optional",
+      "source": "skills-optional/godmode",
+      "original": "skills-archive/godmode"
+    },
+    "google-workspace": {
+      "status": "optional",
+      "source": "skills-optional/google-workspace",
+      "original": "skills-archive/google-workspace"
+    },
+    "grok-image-to-video": {
+      "status": "optional",
+      "source": "skills-optional/grok-image-to-video",
+      "original": "skills-archive/grok-image-to-video"
+    },
+    "hatch-pet": {
+      "status": "global",
+      "source": "skills/hatch-pet",
+      "original": "~/.codex/skills/hatch-pet"
+    },
+    "heartmula": {
+      "status": "optional",
+      "source": "skills-optional/heartmula",
+      "original": "skills-archive/heartmula"
+    },
+    "hermes-agent": {
+      "status": "optional",
+      "source": "skills-optional/hermes-agent",
+      "original": "skills-archive/hermes-agent"
+    },
+    "hermes-agent-skill-authoring": {
+      "status": "optional",
+      "source": "skills-optional/hermes-agent-skill-authoring",
+      "original": "skills-archive/hermes-agent-skill-authoring"
+    },
+    "hermes-desktop-environment": {
+      "status": "optional",
+      "source": "skills-optional/hermes-desktop-environment",
+      "original": "skills-archive/hermes-desktop-environment"
+    },
+    "hermes-memory-providers": {
+      "status": "optional",
+      "source": "skills-optional/hermes-memory-providers",
+      "original": "skills-archive/hermes-memory-providers"
+    },
+    "hermes-s6-container-supervision": {
+      "status": "optional",
+      "source": "skills-optional/hermes-s6-container-supervision",
+      "original": "skills-archive/hermes-s6-container-supervision"
+    },
+    "himalaya": {
+      "status": "optional",
+      "source": "skills-optional/himalaya",
+      "original": "skills-archive/himalaya"
+    },
+    "html-artifact": {
+      "status": "optional",
+      "source": "skills-optional/html-artifact",
+      "original": "skills-archive/html-artifact"
+    },
+    "huggingface-hub": {
+      "status": "global",
+      "source": "skills/huggingface-hub",
+      "original": "skills-archive/huggingface-hub"
+    },
+    "humanizer": {
+      "status": "retired",
+      "source": "skills-archive/humanizer",
+      "original": "skills-archive/humanizer",
+      "merged_into": "codex/AGENTS.md"
+    },
+    "hyperframes": {
+      "status": "optional",
+      "source": "skills-optional/hyperframes",
+      "original": "skills-archive/hyperframes"
+    },
+    "imagegen": {
+      "status": "retired",
+      "source": "skills-archive/imagegen",
+      "original": "skills-archive/imagegen"
+    },
+    "implement": {
+      "status": "retired",
+      "source": "skills-archive/implement",
+      "original": "skills-archive/implement",
+      "merged_into": "codex/AGENTS.md"
+    },
+    "interview": {
+      "status": "retired",
+      "source": "skills-archive/interview",
+      "original": "skills-archive/interview",
+      "merged_into": "codex/AGENTS.md"
+    },
+    "jupyter-live-kernel": {
+      "status": "optional",
+      "source": "skills-optional/jupyter-live-kernel",
+      "original": "skills-archive/jupyter-live-kernel"
+    },
+    "kanban-codex-lane": {
+      "status": "optional",
+      "source": "skills-optional/kanban-codex-lane",
+      "original": "skills-archive/kanban-codex-lane"
+    },
+    "kanban-orchestrator": {
+      "status": "optional",
+      "source": "skills-optional/kanban-orchestrator",
+      "original": "skills-archive/kanban-orchestrator"
+    },
+    "kanban-worker": {
+      "status": "optional",
+      "source": "skills-optional/kanban-worker",
+      "original": "skills-archive/kanban-worker"
+    },
+    "kimi-webbridge": {
+      "status": "optional",
+      "source": "skills-optional/kimi-webbridge",
+      "original": "skills-archive/kimi-webbridge"
+    },
+    "language-translator": {
+      "status": "retired",
+      "source": "skills-archive/language-translator",
+      "original": "skills-archive/language-translator"
+    },
+    "linear": {
+      "status": "optional",
+      "source": "skills-optional/linear",
+      "original": "skills-archive/linear"
+    },
+    "linux-dev-environment": {
+      "status": "retired",
+      "source": "skills-archive/linux-dev-environment",
+      "original": "skills-archive/linux-dev-environment",
+      "merged_into": "linux-server-environment-migration"
+    },
+    "linux-server-environment-migration": {
+      "status": "global",
+      "source": "skills/linux-server-environment-migration",
+      "original": "skills-archive/linux-server-environment-migration"
+    },
+    "llm-fine-tuning": {
+      "status": "optional",
+      "source": "skills-optional/llm-fine-tuning",
+      "original": "skills-archive/llm-fine-tuning"
+    },
+    "llm-inference-serving": {
+      "status": "optional",
+      "source": "skills-optional/llm-inference-serving",
+      "original": "skills-archive/llm-inference-serving"
+    },
+    "llm-wiki": {
+      "status": "global",
+      "source": "skills/llm-wiki",
+      "original": "skills-archive/llm-wiki"
+    },
+    "lm-evaluation-harness": {
+      "status": "optional",
+      "source": "skills-optional/lm-evaluation-harness",
+      "original": "skills-archive/lm-evaluation-harness"
+    },
+    "lsp-index-engineer": {
+      "status": "retired",
+      "source": "skills-archive/lsp-index-engineer",
+      "original": "skills-archive/lsp-index-engineer"
+    },
+    "macos-computer-use": {
+      "status": "retired",
+      "source": "skills-archive/macos-computer-use",
+      "original": "skills-archive/macos-computer-use"
+    },
+    "manim-video": {
+      "status": "optional",
+      "source": "skills-optional/manim-video",
+      "original": "skills-archive/manim-video"
+    },
+    "maps": {
+      "status": "optional",
+      "source": "skills-optional/maps",
+      "original": "skills-archive/maps"
+    },
+    "markdown-viewer": {
+      "status": "retired",
+      "source": "skills-archive/markdown-viewer",
+      "original": "skills-archive/markdown-viewer"
+    },
+    "minecraft-modpack-server": {
+      "status": "optional",
+      "source": "skills-optional/minecraft-modpack-server",
+      "original": "skills-archive/minecraft-modpack-server"
+    },
+    "moe-project-access": {
+      "status": "project",
+      "source": "skills-projects/moe-project-access",
+      "original": "skills-archive/moe-project-access"
+    },
+    "nano-pdf": {
+      "status": "optional",
+      "source": "skills-optional/nano-pdf",
+      "original": "skills-archive/nano-pdf"
+    },
+    "native-mcp": {
+      "status": "optional",
+      "source": "skills-optional/native-mcp",
+      "original": "skills-archive/native-mcp"
+    },
+    "notion": {
+      "status": "optional",
+      "source": "skills-optional/notion",
+      "original": "skills-archive/notion"
+    },
+    "obsidian": {
+      "status": "optional",
+      "source": "skills-optional/obsidian",
+      "original": "skills-archive/obsidian"
+    },
+    "ocr-and-documents": {
+      "status": "optional",
+      "source": "skills-optional/ocr-and-documents",
+      "original": "skills-archive/ocr-and-documents"
+    },
+    "openai-docs": {
+      "status": "retired",
+      "source": "skills-archive/openai-docs",
+      "original": "skills-archive/openai-docs"
+    },
+    "openhue": {
+      "status": "optional",
+      "source": "skills-optional/openhue",
+      "original": "skills-archive/openhue"
+    },
+    "orca-cli": {
+      "status": "optional",
+      "source": "skills-optional/orca-cli",
+      "original": "skills-archive/orca-cli"
+    },
+    "orchestration": {
+      "status": "optional",
+      "source": "skills-optional/orchestration",
+      "original": "skills-archive/orchestration"
+    },
+    "p5js": {
+      "status": "optional",
+      "source": "skills-optional/p5js",
+      "original": "skills-archive/p5js"
+    },
+    "paper-note-generator": {
+      "status": "global",
+      "source": "skills/paper-note-generator",
+      "original": "skills-archive/paper-note-generator"
+    },
+    "pdf": {
+      "status": "retired",
+      "source": "skills-archive/pdf",
+      "original": "skills-archive/pdf"
+    },
+    "pixel-art": {
+      "status": "optional",
+      "source": "skills-optional/pixel-art",
+      "original": "skills-archive/pixel-art"
+    },
+    "planning": {
+      "status": "retired",
+      "source": "skills-archive/planning",
+      "original": "skills-archive/planning",
+      "merged_into": "codex/AGENTS.md"
+    },
+    "planning-with-files": {
+      "status": "optional",
+      "source": "skills-optional/planning-with-files",
+      "original": "skills-archive/planning-with-files"
+    },
+    "planning-with-files-zh": {
+      "status": "retired",
+      "source": "skills-archive/planning-with-files-zh",
+      "original": "skills-archive/planning-with-files-zh",
+      "merged_into": "planning-with-files"
+    },
+    "plugin-creator": {
+      "status": "retired",
+      "source": "skills-archive/plugin-creator",
+      "original": "skills-archive/plugin-creator"
+    },
+    "pokemon-player": {
+      "status": "optional",
+      "source": "skills-optional/pokemon-player",
+      "original": "skills-archive/pokemon-player"
+    },
+    "polymarket": {
+      "status": "optional",
+      "source": "skills-optional/polymarket",
+      "original": "skills-archive/polymarket"
+    },
+    "popular-web-designs": {
+      "status": "optional",
+      "source": "skills-optional/popular-web-designs",
+      "original": "skills-archive/popular-web-designs"
+    },
+    "powerpoint": {
+      "status": "retired",
+      "source": "skills-archive/powerpoint",
+      "original": "skills-archive/powerpoint",
+      "merged_into": "academic-research-output"
+    },
+    "presentations": {
+      "status": "retired",
+      "source": "skills-archive/presentations",
+      "original": "skills-archive/presentations"
+    },
+    "pretext": {
+      "status": "optional",
+      "source": "skills-optional/pretext",
+      "original": "skills-archive/pretext"
+    },
+    "project-management-experiment-tracker": {
+      "status": "retired",
+      "source": "skills-archive/project-management-experiment-tracker",
+      "original": "skills-archive/project-management-experiment-tracker"
+    },
+    "prompt-engineer": {
+      "status": "retired",
+      "source": "skills-archive/prompt-engineer",
+      "original": "skills-archive/prompt-engineer"
+    },
+    "publish-note": {
+      "status": "project",
+      "source": "skills-projects/publish-note",
+      "original": "skills-archive/publish-note"
+    },
+    "quiz": {
+      "status": "retired",
+      "source": "skills-archive/quiz",
+      "original": "skills-archive/quiz",
+      "merged_into": "course-learning-planner"
+    },
+    "reference": {
+      "status": "retired",
+      "source": "skills-archive/reference",
+      "original": "skills-archive/reference",
+      "merged_into": "codex/AGENTS.md"
+    },
+    "remotion": {
+      "status": "optional",
+      "source": "skills-optional/remotion",
+      "original": "skills-archive/remotion"
+    },
+    "research-content-monitoring": {
+      "status": "global",
+      "source": "skills/research-content-monitoring",
+      "original": "skills-archive/research-content-monitoring"
+    },
+    "resume-review": {
+      "status": "retired",
+      "source": "skills-archive/resume-review",
+      "original": "skills-archive/resume-review",
+      "merged_into": "bilingual-resume-typst"
+    },
+    "segment-anything": {
+      "status": "optional",
+      "source": "skills-optional/segment-anything",
+      "original": "skills-archive/segment-anything"
+    },
+    "sglang-skill": {
+      "status": "global",
+      "source": "skills-local/sglang-skill",
+      "original": "skills-archive/sglang-skill"
+    },
+    "sketch": {
+      "status": "retired",
+      "source": "skills-archive/sketch",
+      "original": "skills-archive/sketch"
+    },
+    "skill-creator": {
+      "status": "retired",
+      "source": "skills-archive/skill-creator",
+      "original": "skills-archive/skill-creator"
+    },
+    "skill-installer": {
+      "status": "retired",
+      "source": "skills-archive/skill-installer",
+      "original": "skills-archive/skill-installer"
+    },
+    "software-development-planning": {
+      "status": "retired",
+      "source": "skills-archive/software-development-planning",
+      "original": "skills-archive/software-development-planning",
+      "merged_into": "planning-with-files"
+    },
+    "software-quality-workflows": {
+      "status": "retired",
+      "source": "skills-archive/software-quality-workflows",
+      "original": "skills-archive/software-quality-workflows",
+      "merged_into": "hermes-agent"
+    },
+    "songsee": {
+      "status": "optional",
+      "source": "skills-optional/songsee",
+      "original": "skills-archive/songsee"
+    },
+    "songwriting-and-ai-music": {
+      "status": "optional",
+      "source": "skills-optional/songwriting-and-ai-music",
+      "original": "skills-archive/songwriting-and-ai-music"
+    },
+    "specialized-document-generator": {
+      "status": "retired",
+      "source": "skills-archive/specialized-document-generator",
+      "original": "skills-archive/specialized-document-generator"
+    },
+    "specialized-mcp-builder": {
+      "status": "retired",
+      "source": "skills-archive/specialized-mcp-builder",
+      "original": "skills-archive/specialized-mcp-builder"
+    },
+    "specialized-model-qa": {
+      "status": "retired",
+      "source": "skills-archive/specialized-model-qa",
+      "original": "skills-archive/specialized-model-qa"
+    },
+    "specialized-workflow-architect": {
+      "status": "retired",
+      "source": "skills-archive/specialized-workflow-architect",
+      "original": "skills-archive/specialized-workflow-architect"
+    },
+    "spotify": {
+      "status": "optional",
+      "source": "skills-optional/spotify",
+      "original": "skills-archive/spotify"
+    },
+    "spreadsheets": {
+      "status": "retired",
+      "source": "skills-archive/spreadsheets",
+      "original": "skills-archive/spreadsheets"
+    },
+    "subagent-driven-development": {
+      "status": "optional",
+      "source": "skills-optional/subagent-driven-development",
+      "original": "skills-archive/subagent-driven-development"
+    },
+    "sync-moe-project": {
+      "status": "retired",
+      "source": "skills-archive/sync-moe-project",
+      "original": "skills-archive/sync-moe-project",
+      "merged_into": "moe-project-access"
+    },
+    "teams-meeting-pipeline": {
+      "status": "optional",
+      "source": "skills-optional/teams-meeting-pipeline",
+      "original": "skills-archive/teams-meeting-pipeline"
+    },
+    "technical-translator-agent": {
+      "status": "retired",
+      "source": "skills-archive/technical-translator-agent",
+      "original": "skills-archive/technical-translator-agent"
+    },
+    "template-creator": {
+      "status": "retired",
+      "source": "skills-archive/template-creator",
+      "original": "skills-archive/template-creator"
+    },
+    "testing-quality-assurance": {
+      "status": "retired",
+      "source": "skills-archive/testing-quality-assurance",
+      "original": "skills-archive/testing-quality-assurance",
+      "merged_into": "triton-skill"
+    },
+    "touchdesigner-mcp": {
+      "status": "optional",
+      "source": "skills-optional/touchdesigner-mcp",
+      "original": "skills-archive/touchdesigner-mcp"
+    },
+    "triton-skill": {
+      "status": "global",
+      "source": "skills-local/triton-skill",
+      "original": "skills-archive/triton-skill"
+    },
+    "warp-agentic-development": {
+      "status": "optional",
+      "source": "skills-optional/warp-agentic-development",
+      "original": "skills-archive/warp-agentic-development"
+    },
+    "webhook-subscriptions": {
+      "status": "optional",
+      "source": "skills-optional/webhook-subscriptions",
+      "original": "skills-archive/webhook-subscriptions"
+    },
+    "weekly-research-report": {
+      "status": "global",
+      "source": "skills/weekly-research-report",
+      "original": "skills-archive/weekly-research-report"
+    },
+    "weights-and-biases": {
+      "status": "optional",
+      "source": "skills-optional/weights-and-biases",
+      "original": "skills-archive/weights-and-biases"
+    },
+    "xurl": {
+      "status": "optional",
+      "source": "skills-optional/xurl",
+      "original": "skills-archive/xurl"
+    },
+    "yeet": {
+      "status": "retired",
+      "source": "skills-archive/yeet",
+      "original": "skills-archive/yeet",
+      "merged_into": "github-operations"
+    },
+    "youtube-content": {
+      "status": "global",
+      "source": "skills/youtube-content",
+      "original": "skills-archive/youtube-content"
+    },
+    "yuanbao": {
+      "status": "optional",
+      "source": "skills-optional/yuanbao",
+      "original": "skills-archive/yuanbao"
+    },
+    "zhihu": {
+      "status": "global",
+      "source": "skills/zhihu",
+      "original": "skills-archive/zhihu"
+    }
+  },
+  "profiles": {
+    "codex-core": [
+      "paper-note-generator",
+      "llm-wiki",
+      "academic-research-output",
+      "weekly-research-report",
+      "course-learning-planner",
+      "research-content-monitoring",
+      "create-local-project-interface",
+      "linux-server-environment-migration",
+      "huggingface-hub",
+      "youtube-content",
+      "zhihu",
+      "github-operations",
+      "hatch-pet"
+    ],
+    "gpu-shared-4": [
+      "cuda-skill",
+      "cutlass-skill",
+      "triton-skill",
+      "sglang-skill"
+    ]
+  },
+  "targets": {
+    "codex": {
+      "path": ".codex/skills",
+      "enabled": true,
+      "profiles": [
+        "codex-core"
+      ],
+      "discovery_group": "codex"
+    },
+    "agents": {
+      "path": ".agents/skills",
+      "enabled": true,
+      "profiles": [
+        "gpu-shared-4"
+      ],
+      "discovery_group": "codex"
+    },
+    "claude": {
+      "path": ".claude/skills",
+      "enabled": true,
+      "profiles": [
+        "codex-core"
+      ],
+      "discovery_group": "claude"
+    },
+    "zcode": {
+      "path": ".zcode/skills",
+      "enabled": false,
+      "profiles": [],
+      "discovery_group": "zcode"
+    }
+  },
+  "projects": {
+    "cs336-stanford-course": {
+      "trigger": "处理 CS336 作业、课程辅导或进度同步"
+    },
+    "bilingual-resume-typst": {
+      "trigger": "审阅或同步本项目简历"
+    },
+    "bupt-thesis-writer": {
+      "trigger": "处理本项目毕业论文"
+    },
+    "publish-note": {
+      "trigger": "整理、预览或发布博客笔记"
+    },
+    "moe-project-access": {
+      "trigger": "接入远程项目或查询实验状态"
+    }
+  },
+  "system_provided": [
+    "imagegen",
+    "openai-docs",
+    "plugin-creator",
+    "skill-creator",
+    "skill-installer",
+    "documents",
+    "pdf",
+    "presentations",
+    "spreadsheets",
+    "template-creator"
+  ]
+}
