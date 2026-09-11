@@ -1,12 +1,13 @@
 {
-  "lastChangelogVersion": "0.84.4",
+  "httpProxy": "http://127.0.0.1:7897",
+  "lastChangelogVersion": "0.85.0",
   "skills": [
     "~/Documents/code/dotfiles/skills"
   ],
   "theme": "catppuccin-frappe",
-  "defaultProvider": "deepseek",
-  "defaultModel": "deepseek-v4-flash",
-  "defaultThinkingLevel": "max",
+  "defaultProvider": "google",
+  "defaultModel": "gemini-3.7-flash",
+  "defaultThinkingLevel": "high",
   "packages": [
     "npm:pi-subagents",
     "npm:@narumitw/pi-goal",
@@ -14,11 +15,14 @@
     "npm:pi-starline",
     "npm:pi-web-access",
     "npm:pi-catppuccin",
-    "npm:@narumitw/pi-plan-mode"
+    "npm:@narumitw/pi-plan-mode",
+    "npm:pi-web-ui"
   ],
   "enabledModels": [
     "deepseek/deepseek-v4-flash",
     "nowcoding/gpt-5.6-sol",
-    "nowcoding-claude/claude-opus-5"
+    "nowcoding-claude/claude-opus-5",
+    "google/gemini-3.7-flash",
+    "deepseek/deepseek-v4-flash-vision-exp"
   ]
 }

@@ -153,6 +153,7 @@ export default function (pi: ExtensionAPI) {
         id: "gpt-5.6-sol",
         name: "GPT-5.6 Sol",
         reasoning: true,
+        defaultThinking: "xhigh",
         thinkingLevelMap: { minimal: "low", xhigh: "xhigh", max: "max" },
         input: ["text", "image"],
         cost: {

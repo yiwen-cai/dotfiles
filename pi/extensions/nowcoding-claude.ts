@@ -68,6 +68,7 @@ export default function (pi: ExtensionAPI) {
         id: "claude-opus-5",
         name: "Claude Opus 5",
         reasoning: true,
+        defaultThinking: "xhigh",
         thinkingLevelMap: { xhigh: "xhigh", max: "max" },
         input: ["text", "image"],
         cost: { input: 5, output: 25, cacheRead: 0.5, cacheWrite: 6.25 },
