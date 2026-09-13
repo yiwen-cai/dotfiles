@@ -6,7 +6,7 @@
 
 ```
 .
-├── skills/                      # 13 个核心入口（按清单部署）
+├── skills/                      # 14 个核心入口（按清单部署）
 ├── skills-local/                # 4 个 GPU 资料入口
 ├── skills-projects/             # 项目专属流程
 ├── skills-optional/             # 默认停用的可选包
@@ -60,7 +60,7 @@
 
 | 来源 | 用途 | 默认部署 |
 |---|---|---|
-| `skills/` | 13 个科研/学习/环境/平台入口 | `~/.codex/skills`、`~/.claude/skills`（同一 profile 镜像） |
+| `skills/` | 14 个科研/学习/环境/平台/表达入口 | `~/.codex/skills`、`~/.claude/skills`（同一 profile 镜像） |
 | `skills-local/` | 4 个 GPU 资料入口 | `~/.agents/skills` |
 | `skills-projects/` | 5 个项目专属包 | 已绑定项目的 `docs/agent-skills/`，由 AGENTS.md 按需路由 |
 | `skills-optional/` | 68 个按需包，入口为 `SKILL.md.disabled` | 默认不部署 |
@@ -72,7 +72,7 @@ Claude Code 的 target 已启用，与 codex 共用 `codex-core` profile，两�
 `claude/skills` 与 `codex/skills` 仍是仓库内的兼容链接，不代表这些宿主的实际部署集合。
 
 target 的 `discovery_group` 表示"由同一个 agent 扫描的目录集合"：同组内一个技能名只能出现在一处
-（`codex` 与 `agents` 同组，互斥），跨组可以镜像同名技能（`claude` 自成一组，镜像 codex 的 13 个入口）。
+（`codex` 与 `agents` 同组，互斥），跨组可以镜像同名技能（`claude` 自成一组，镜像 codex 的 14 个入口）。
 未声明该字段的 target 归入同一个默认组并保持互斥，镜像必须显式声明。
 
 部署器只操作**已登记的名称**，不再对共享目录执行 `rsync --delete`。未知 skill 和 `.system` 原样保留；同名未知目录、用户后续编辑或过期计划会报冲突。
@@ -110,6 +110,11 @@ python3 scripts/manage-skills.py rollback --snapshot /absolute/path/to/snapshot
 不自动下载大型源码仓库，也不启动 GPU 实验。
 
 迁移依据见 [审查](SKILL-AUDIT-2026-09-06.md)、[方案](.hermes/plans/2026-09-06-skill-consolidation.md) 和 [执行记录](docs/skill-migration/RESULTS.md)。
+
+2026-09-13 从上游引入 `eli5`（[官方社区插件](https://github.com/anthropics/claude-plugins-community/tree/main/eli5) 与 [DreambigOu/ELI5](https://github.com/DreambigOu/ELI5)，均为 MIT）：
+合并两份上游内容并本地化为中文入口，登记为 global 并加入 `codex-core`，因此 `~/.codex/skills` 与 `~/.claude/skills` 各有一份；
+`~/.agents/skills` 与 codex 同属一个 discovery group，同名技能只能落在一处，不再镜像；pi agent 直接读取仓库 `skills/`，无需额外登记。
+来源、许可与与上游差异记录在 [skills/eli5/references/upstream.md](skills/eli5/references/upstream.md)。
 
 ## 在新机器上安装
 

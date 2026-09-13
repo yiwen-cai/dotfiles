@@ -170,6 +170,11 @@
       "source": "skills-optional/dspy",
       "original": "skills-archive/dspy"
     },
+    "eli5": {
+      "status": "global",
+      "source": "skills/eli5",
+      "upstream": "anthropics/claude-plugins-community eli5 + DreambigOu/ELI5 (MIT, 2026-09-13)"
+    },
     "engineering-ai-data-remediation-engineer": {
       "status": "retired",
       "source": "skills-archive/engineering-ai-data-remediation-engineer",
@@ -844,7 +849,8 @@
       "youtube-content",
       "zhihu",
       "github-operations",
-      "hatch-pet"
+      "hatch-pet",
+      "eli5"
     ],
     "gpu-shared-4": [
       "cuda-skill",
